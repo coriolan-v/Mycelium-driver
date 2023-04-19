@@ -35,7 +35,7 @@ int previousDataLength = 0;
 
 // Change ip and mac address for your setup
 byte ip[] = {192, 168, 1, 3};
-byte mac[] = {0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEC};
+byte mac[] = {0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEA};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
