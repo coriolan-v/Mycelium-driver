@@ -17,12 +17,14 @@
 #include <OctoWS2811.h>
 
 // Any group of digital pins may be used
-const int numPins = 20;
+const int numPins = 48;
 byte pinList[numPins] = {
-23, 22, 21, 20, 19, 
-18, 17, 16, 15, 14,
-13, 41, 40, 39, 38,
-37, 36, 35, 34, 33};
+ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 
+20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
+30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 
+40, 41, 49, 50, 51, 52, 53, 54
+};
 
 const int ledsPerStrip = 300;
 
@@ -45,16 +47,26 @@ void setup() {
   leds.show();
 }
 
-#define RED    0xFF0000
-#define GREEN  0x00FF00
-#define BLUE   0x0000FF
-#define YELLOW 0xFFFF00
-#define PINK   0xFF1088
-#define ORANGE 0xE05800
-#define WHITE  0xFFFFFF
+// #define RED    0xFF0000
+// #define GREEN  0x00FF00
+// #define BLUE   0x0000FF
+// #define YELLOW 0xFFFF00
+// #define PINK   0xFF1088
+// #define ORANGE 0xE05800
+// #define WHITE  0xFFFFFF
+
+// Half....
+// #define RED    0x800000
+// #define GREEN  0x008000
+// #define BLUE   0x000080
+// #define YELLOW 0x808000
+// #define PINK   0x80084B
+// #define ORANGE 0x6E2c00
+// #define WHITE  0x808080
+
 
 // Less intense...
-/*
+
 #define RED    0x160000
 #define GREEN  0x001600
 #define BLUE   0x000016
@@ -62,10 +74,10 @@ void setup() {
 #define PINK   0x120009
 #define ORANGE 0x100400
 #define WHITE  0x101010
-*/
+
 
 void loop() {
-  int microsec = 2000000 / leds.numPixels();  // change them all in 2 seconds
+  int microsec = 5000000 / leds.numPixels();  // change them all in 2 seconds
 
   // uncomment for voltage controlled speed
   // millisec = analogRead(A9) / 40;
