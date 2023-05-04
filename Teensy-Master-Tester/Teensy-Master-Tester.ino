@@ -14,7 +14,7 @@ byte pinList[numPins] = {
 40, 41, 49, 50, 51, 52, 53, 54
 };
 
-const int ledsPerStrip = 300;
+const int ledsPerStrip = 100;
 
 
 // These buffers need to be large enough for all the pixels.
@@ -26,7 +26,7 @@ const int bytesPerLED = 3;  // change to 4 if using RGBW
 DMAMEM int displayMemory[ledsPerStrip * numPins * bytesPerLED / 4];
 int drawingMemory[ledsPerStrip * numPins * bytesPerLED / 4];
 
-const int config = WS2811_GRB | WS2811_800kHz;
+const int config = WS2811_BRG | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config, numPins, pinList);
 
@@ -65,7 +65,7 @@ void setup() {
 
 
 void loop() {
-  int microsec = 5000000 / leds.numPixels();  // change them all in 2 seconds
+  int microsec = 1000;// / leds.numPixels();  // change them all in 2 seconds
 
   // uncomment for voltage controlled speed
   // millisec = analogRead(A9) / 40;
@@ -84,6 +84,6 @@ void colorWipe(int color, int wait)
   for (int i=0; i < leds.numPixels(); i++) {
     leds.setPixel(i, color);
     leds.show();
-    delayMicroseconds(wait);
+    //delay(1);
   }
 }

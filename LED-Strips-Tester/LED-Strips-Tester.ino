@@ -13,7 +13,7 @@
 // 
 
 // How many leds are in the strip?
-#define NUM_LEDS 300
+#define NUM_LEDS 100
 
 // For led chips like WS2812, which have a data line, ground, and power, you just
 // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
@@ -28,11 +28,11 @@ CRGB onBoardLED[1];
 // This function sets up the ledsand tells the controller about them
 void setup() {
 	// sanity check delay - allows reprogramming if accidently blowing power w/leds
-   	delay(2000);
+   	//delay(2000);
 
     // Uncomment/edit one of the following lines for your leds arrangement.
     // ## Clockless types ##
-     FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL>(onBoardLED, NUM_LEDS);  // GRB ordering is assumed
+    .. FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL>(onBoardLED, NUM_LEDS);  // GRB ordering is assumed
     // FastLED.addLeds<SM16703, DATA_PIN, RGB>(leds, NUM_LEDS);
     // FastLED.addLeds<TM1829, DATA_PIN, RGB>(leds, NUM_LEDS);
     // FastLED.addLeds<TM1812, DATA_PIN, RGB>(leds, NUM_LEDS);
@@ -73,25 +73,11 @@ void setup() {
     // FastLED.addLeds<SK9822, DATA_PIN, CLOCK_PIN, RGB>(leds, NUM_LEDS);  // BGR ordering is typical
     FastLED.setBrightness(50);
 
-    pinMode(3, OUTPUT);
-    digitalWrite(3, HIGH);
-    delay(1000);
-    digitalWrite(3, LOW);
-    delay(1000);
+   
 
     Serial.begin(115200);
 
-    onBoardLED[0] = CRGB::Red;
-    FastLED.show();
-    delay(1000);
-
-    onBoardLED[0] = CRGB::Green;
-    FastLED.show();
-    delay(1000);
-
-    onBoardLED[0] = CRGB::Blue;
-    FastLED.show();
-    delay(1000);
+  
 }
 
 // This function runs over and over, and is where you do the magic to light
