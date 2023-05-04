@@ -14,17 +14,20 @@
 // Ideas for improving performance with WIZ820io / WIZ850io Ethernet:
 // https://forum.pjrc.com/threads/45760-E1-31-sACN-Ethernet-DMX-Performance-help-6-Universe-Limit-improvements
 
-const int numPins = 1;
-byte pinList[numPins] = {23};
-
 // OctoWS2811 settings
-const int ledsPerStrip = 492; // change for your setup
-const byte numStrips= 1; // change for your setup
+const int ledsPerStrip = 100; // change for your setup
+const byte numStrips= 3; // change for your setup
 DMAMEM int displayMemory[ledsPerStrip*6];
 int drawingMemory[ledsPerStrip*6];
 const int config = WS2811_GRB | WS2811_800kHz;
-//OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
+
+const int numPins = 3;
+byte pinList[numPins] = {23, 22, 21};
+
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config, numPins, pinList);
+
+
+
 
 // Artnet settings
 Artnet artnet;
@@ -39,7 +42,7 @@ bool sendFrame = 1;
 
 // Change ip and mac address for your setup
 byte ip[] = {192, 168, 1, 3};
-byte mac[] = {0x04, 0xE9, 0xE5, 0x00, 0x69, 0xED};
+byte mac[] = {0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEC};
 
 void setup()
 {
@@ -50,6 +53,9 @@ void setup()
 
   // this will be called for each packet received
   artnet.setArtDmxCallback(onDmxFrame);
+
+ Serial.print("maxUniverses: ");
+  Serial.println(maxUniverses);
 }
 
 void loop()
@@ -61,16 +67,31 @@ void loop()
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data)
 {
   sendFrame = 1;
+  Serial.print("maxUniverses: ");
+  Serial.println(maxUniverses);
+ Serial.print(universe);
+  Serial.print("/");
+  Serial.print(length);
+  Serial.print("/");
+  Serial.print(sequence);
+   Serial.print("/");
+  Serial.println(*data);
 
   // Store which universe has got in
-  if (universe < maxUniverses)
+  if (universe < maxUniverses){
     universesReceived[universe] = 1;
+  }
 
   for (int i = 0 ; i < maxUniverses ; i++)
   {
+    Serial.print("universesReceived ");
+     Serial.print(i);
+     Serial.print(": ");
+Serial.println(universesReceived[i]);
+
     if (universesReceived[i] == 0)
     {
-      //Serial.println("Broke");
+      Serial.println("Broke");
       sendFrame = 0;
       break;
     }
