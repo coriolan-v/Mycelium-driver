@@ -89,6 +89,7 @@ void setup() {
   artnet.begin(mac, ip);
   // this will be called for each packet received
   artnet.setArtDmxCallback(onDmxFrame);
+  artnet.setArtSyncCallback(onSync);
 
   Serial.println("Artnet configured! Testing LEDs...");
 
@@ -96,6 +97,11 @@ void setup() {
   //allLEDsOn(0, 0, 0);
 
   Serial.println("Ready!");
+}
+
+void onSync(IPAddress remoteIP) {
+    //leds.show();
+    showLEDs();
 }
 
 void loop() {
@@ -112,345 +118,394 @@ bool universesReceived[maxUniverses];
 unsigned long prev = 0;
 int fps = 0;
 
+int checkSum = 0;
+
+bool individualSync = false;
+
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
 
-  sendFrame = 1;
+//  Serial.print(universe);
+//  Serial.print("/");
+//  Serial.print(length);
+//  Serial.print("/");
+//  Serial.print(sequence);
+//  Serial.print("/");
+//  Serial.print(*data);
+//  Serial.println();
 
-  // Serial.print(
-
-  // Store which universe has got in
-  if ((universe - startUniverse) < maxUniverses) {
-    universesReceived[universe - startUniverse] = 1;
-    //Serial.print("stored: ");
-    //Serial.println(universe);
-  }
-
-
-  for (int i = 0; i < maxUniverses; i++) {
-    if (universesReceived[i] == 0) {
-      sendFrame = 0;
-      //Serial.print(i);
-      //Serial.print(": ");
-      //Serial.println(("0"));
-      break;
-    }
-  }
-
-  //    Serial.print(universe);
-  //   Serial.print("/");
-  //   Serial.print(length);
-  //   Serial.print("/");
-  //   Serial.print(sequence);
-  //   Serial.print("/");
-  //   Serial.print(*data);
-  //   Serial.println();
-
-  length = 300;
-
-  if (sendFrame) {
-    //leds.show();
-    // Reset universeReceived to 0
-   // memset(universesReceived, 0, maxUniverses);
-
-    static unsigned long lastMillis;
-  static unsigned long frameCount;
-  static unsigned int framesPerSecond;
-  
- //Serial.print(millis());
-  //Serial.print(" SEND ");
-   //Serial.println(frameCount);
-  // It is best if we declare millis() only once
-  unsigned long now = millis();
-  frameCount ++;
-  if (now - lastMillis >= 1 * 1000) {
-    framesPerSecond = frameCount / 1;
-   Serial.print("FPS: "); Serial.println(framesPerSecond);
-    frameCount = 0;
-    lastMillis = now;
-  }
-    
-//    if(millis() - prev >= 100)
+  // sendFrame = 1;
+  //
+  //  // Serial.print(
+  //
+  //    //Serial.print("stored: ");
+  //   // Serial.println(universe);
+  //
+  //  // Store which universe has got in
+//  if ((universe - startUniverse) < maxUniverses) {
+//
+//    if (universesReceived[universe - startUniverse] == 0)
 //    {
-//      prev = millis();
-//      Serial.print(millis());
-//      Serial.println(" SEND ");
-//      Serial.println(fps);
-//      fps = 0;
-//    } else {
-//      fps++;
+//      universesReceived[universe - startUniverse] = 1;
+//
+//      checkSum++;
+//
+//      Serial.print("stored FIRST TIME: ");
+//      Serial.print(universe);
+//      Serial.print(" checksum: ");
+//      Serial.println(checkSum);
 //    }
-    showLEDs();
-  }
+//
+//     Serial.print("/ stored: ");
+//     Serial.println(universe);
+//  }
+
+//  if (universe == maxUniverses)
+//    {
+//      sendFrame = 1;
+//      Serial.print(millis());
+//      Serial.println(" SEND______");
+//
+//      checkSum = 0;
+//
+//      for (int i = 0; i < maxUniverses; i++) {
+//        universesReceived[i] = 0;
+//      }
+//    }
+
+
+    
+  //
+  //
+
+//  for (int i = 0; i < maxUniverses; i++) {
+//
+//    if (universesReceived[i] == 1) {
+//      checkSum++;
+//      Serial.print(i);
+//    }
+//
+//    
+//  }
+
+
+//  for (int i = 0; i < maxUniverses; i++) {
+//    if (universesReceived[i] == 0) {
+//      sendFrame = 0;
+//      //Serial.print(i);
+//      //Serial.print(": ");
+//      //Serial.println(("0"));
+//      break;
+//    }
+//  }
+//  //
+//  //
+//  //
+//  //  length = 300;
+//  //
+//  if (sendFrame) {
+//
+//     if(!individualSync) showLEDs();
+//  }
+
+
+
+  //    //leds.show();
+  //    // Reset universeReceived to 0
+  //    // memset(universesReceived, 0, maxUniverses);
+  //
+  //    static unsigned long lastMillis;
+  //    static unsigned long frameCount;
+  //    static unsigned int framesPerSecond;
+  //
+  //    //Serial.print(millis());
+  //    //Serial.print(" SEND ");
+  //    //Serial.println(frameCount);
+  //    // It is best if we declare millis() only once
+  //    unsigned long now = millis();
+  //    frameCount ++;
+  //    if (now - lastMillis >= 1 * 1000) {
+  //      framesPerSecond = frameCount / 1;
+  //      Serial.print(millis()); Serial.print("ms uptime, FPS: "); Serial.println(framesPerSecond);
+  //      frameCount = 0;
+  //      lastMillis = now;
+  //    }
+  //
+  //    //    if(millis() - prev >= 100)
+  //    //    {
+  //    //      prev = millis();
+  //    //      Serial.print(millis());
+  //    //      Serial.println(" SEND ");
+  //    //      Serial.println(fps);
+  //    //      fps = 0;
+  //    //    } else {
+  //    //      fps++;
+  //    //    }
+  //
+  //    showLEDs();
+  //  }
 
   if (universe == 1) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-      //   Serial.print(i);
-      //   Serial.print(":");
-      // Serial.print(data[i]);
-      //  Serial.print("-");
-      // Serial.print(data[i * 3 + 1]);
-      //  Serial.print("-");
-      // Serial.print(data[i * 3 + 2]);
-      // Serial.print("/");
+     // int led = i + 1;
+      leds.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    //Serial.println();
-    // leds.show();
+    if(individualSync) leds.show();
   }
 
   if (universe == 2) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds2.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds2.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds2.show();
+    if(individualSync) leds2.show();
   }
 
   if (universe == 3) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds3.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds3.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds3.show();
+    if(individualSync) leds3.show();
   }
 
   if (universe == 4) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds4.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds4.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds4.show();
+    if(individualSync) leds4.show();
   }
 
   if (universe == 5) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds5.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds5.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds5.show();
+    if(individualSync) leds5.show();
   }
 
   if (universe == 6) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds6.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds6.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds6.show();
+    if(individualSync) leds6.show();
   }
 
   if (universe == 7) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds7.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds7.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds7.show();
+    if(individualSync) leds7.show();
   }
 
   if (universe == 8) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds8.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds8.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds8.show();
+    if(individualSync) leds8.show();
   }
 
   if (universe == 9) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds9.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds9.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds9.show();
+    if(individualSync) leds9.show();
   }
 
   if (universe == 10) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds10.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds10.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    //  leds10.show();
+    if(individualSync) leds10.show();
   }
 
   if (universe == 11) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds11.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds11.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    //  leds11.show();
+    if(individualSync) leds11.show();
   }
 
   if (universe == 12) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds12.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds12.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds12.show();
+    if(individualSync) leds12.show();
   }
 
   if (universe == 13) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds13.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds13.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds13.show();
+    if(individualSync) leds13.show();
   }
 
   if (universe == 14) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds14.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds14.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds14.show();
+    if(individualSync) leds14.show();
   }
 
   if (universe == 15) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds15.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds15.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds15.show();
+    if(individualSync) leds15.show();
   }
 
   if (universe == 16) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds16.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds16.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds16.show();
+    if(individualSync) leds16.show();
   }
 
   if (universe == 17) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds17.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds17.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds17.show();
+    if(individualSync) leds17.show();
   }
 
   if (universe == 18) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds18.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds18.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds18.show();
+    if(individualSync) leds18.show();
   }
 
   if (universe == 19) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds19.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds19.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds19.show();
+    if(individualSync) leds19.show();
   }
 
   if (universe == 20) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds20.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds20.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds20.show();
+    if(individualSync) leds20.show();
   }
 
   if (universe == 21) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds21.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+    //  int led = i + 1;
+      leds21.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    //  leds21.show();
+    if(individualSync) leds21.show();
   }
 
   if (universe == 22) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds22.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+      //int led = i + 1;
+      leds22.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    //  leds22.show();
+    if(individualSync) leds22.show();
   }
 
   if (universe == 23) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds23.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+     // int led = i + 1;
+      leds23.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds23.show();
+    if(individualSync) leds23.show();
   }
 
   if (universe == 24) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds24.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+    //  int led = i + 1;
+      leds24.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    // leds24.show();
+    if(individualSync) leds24.show();
   }
 
   if (universe == 25) {
     for (unsigned int i = 0; i < length / 3; i++) {
-      int led = i + 1;
-      leds25.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+    //  int led = i + 1;
+      leds25.setPixelColor(i + 1, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    //leds25.show();
+    if(individualSync) leds25.show();
   }
 
-//  if (universe == 26) {
-//    for (unsigned int i = 0; i < length / 3; i++) {
-//      int led = i + 1;
-//      leds26.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-//    }
-//    //leds25.show();
-//  }
-//
-//  if (universe == 27) {
-//    for (unsigned int i = 0; i < length / 3; i++) {
-//      int led = i + 1;
-//      leds27.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-//    }
-//    //leds25.show();
-//  }
-//
-//  if (universe == 28) {
-//    for (unsigned int i = 0; i < length / 3; i++) {
-//      int led = i + 1;
-//      leds28.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-//    }
-//    //leds25.show();
-//  }
-//
-//  if (universe == 29) {
-//    for (unsigned int i = 0; i < length / 3; i++) {
-//      int led = i + 1;
-//      leds29.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-//    }
-//    //leds25.show();
-//  }
-//
-//  if (universe == 30) {
-//    for (unsigned int i = 0; i < length / 3; i++) {
-//      int led = i + 1;
-//      leds30.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-//    }
-//    //leds25.show();
-//  }
-//
-//  if (universe == 31) {
-//    for (unsigned int i = 0; i < length / 3; i++) {
-//      int led = i + 1;
-//      leds31.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-//    }
-//    //leds25.show();
-//  }
-//
-//  if (universe == 32) {
-//    for (unsigned int i = 0; i < length / 3; i++) {
-//      int led = i + 1;
-//      leds32.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-//    }
-    //leds25.show();
- // }
-//
-//  if (universe == maxSyncUniverse)
-//  {
-//    showLEDs();
-//  }
+  //  if (universe == 26) {
+  //    for (unsigned int i = 0; i < length / 3; i++) {
+  //      int led = i + 1;
+  //      leds26.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    }
+  //    //leds25.show();
+  //  }
+  //
+  //  if (universe == 27) {
+  //    for (unsigned int i = 0; i < length / 3; i++) {
+  //      int led = i + 1;
+  //      leds27.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    }
+  //    //leds25.show();
+  //  }
+  //
+  //  if (universe == 28) {
+  //    for (unsigned int i = 0; i < length / 3; i++) {
+  //      int led = i + 1;
+  //      leds28.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    }
+  //    //leds25.show();
+  //  }
+  //
+  //  if (universe == 29) {
+  //    for (unsigned int i = 0; i < length / 3; i++) {
+  //      int led = i + 1;
+  //      leds29.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    }
+  //    //leds25.show();
+  //  }
+  //
+  //  if (universe == 30) {
+  //    for (unsigned int i = 0; i < length / 3; i++) {
+  //      int led = i + 1;
+  //      leds30.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    }
+  //    //leds25.show();
+  //  }
+  //
+  //  if (universe == 31) {
+  //    for (unsigned int i = 0; i < length / 3; i++) {
+  //      int led = i + 1;
+  //      leds31.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    }
+  //    //leds25.show();
+  //  }
+  //
+  //  if (universe == 32) {
+  //    for (unsigned int i = 0; i < length / 3; i++) {
+  //      int led = i + 1;
+  //      leds32.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    }
+  //leds25.show();
+  // }
+  //
+
+  //    if (universe == maxSyncUniverse)
+  //    {
+  //      showLEDs();
+  //    }
+
 }
 
 // void initTest() {
