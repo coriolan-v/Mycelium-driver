@@ -4,6 +4,8 @@
 #include <SPI.h>
 #include <Adafruit_NeoPixel.h>
 
+int maxSyncUniverse = 20;
+
 // Neopixel settings
 const int numLeds = 100;                   // change for your setup
 // const int numberOfChannels = numLeds * 3;  // Total number of channels you want to receive (1 led = 3 channels)
@@ -14,7 +16,7 @@ byte dataPins[] = {
   23, 22, 21, 20, 19, 18, 17, 16,
   15, 14, 41, 40, 39, 38, 37, 36,
   0, 1, 2, 3, 4, 5, 6, 7,
-  8  //, 9, 10, 11, 12, 24, 25, 26
+  8, 9, 10, 11, 12, 24, 25, 26
 };
 
 Adafruit_NeoPixel leds = Adafruit_NeoPixel(numLeds, dataPins[0], NEO_GRB);
@@ -45,6 +47,13 @@ Adafruit_NeoPixel leds23 = Adafruit_NeoPixel(numLeds, dataPins[22], NEO_GRB);
 Adafruit_NeoPixel leds24 = Adafruit_NeoPixel(numLeds, dataPins[23], NEO_GRB);
 
 Adafruit_NeoPixel leds25 = Adafruit_NeoPixel(numLeds, dataPins[24], NEO_GRB);
+Adafruit_NeoPixel leds26 = Adafruit_NeoPixel(numLeds, dataPins[25], NEO_GRB);
+Adafruit_NeoPixel leds27 = Adafruit_NeoPixel(numLeds, dataPins[26], NEO_GRB);
+Adafruit_NeoPixel leds28 = Adafruit_NeoPixel(numLeds, dataPins[27], NEO_GRB);
+Adafruit_NeoPixel leds29 = Adafruit_NeoPixel(numLeds, dataPins[28], NEO_GRB);
+Adafruit_NeoPixel leds30 = Adafruit_NeoPixel(numLeds, dataPins[29], NEO_GRB);
+Adafruit_NeoPixel leds31 = Adafruit_NeoPixel(numLeds, dataPins[30], NEO_GRB);
+Adafruit_NeoPixel leds32 = Adafruit_NeoPixel(numLeds, dataPins[31], NEO_GRB);
 
 // Artnet settings
 Artnet artnet;
@@ -57,23 +66,36 @@ Artnet artnet;
 // int previousDataLength = 0;
 
 // Change ip and mac address for your setup
-byte ip[] = { 192, 168, 1, 3 };
+byte ip[] = { 10, 0, 0, 41 };
 byte mac[] = { 0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEC };
 
 void setup() {
 
+  Serial.begin(115200);
+
+
+  pinMode(13, OUTPUT);
+  digitalWrite(13, HIGH);
+
+  Serial.println("Testing LEDs...");
+
   beginLEDs();
 
-  allLEDsOn(0, 0, 25);
-  allLEDsOn(0, 0, 0);
+  //allLEDsOn(0, 0, 25);
+  //allLEDsOn(0, 0, 0);
+
 
   //Serial.begin(115200);
   artnet.begin(mac, ip);
   // this will be called for each packet received
   artnet.setArtDmxCallback(onDmxFrame);
 
-  allLEDsOn(0, 25, 0);
-  allLEDsOn(0, 0, 0);
+  Serial.println("Artnet configured! Testing LEDs...");
+
+  //allLEDsOn(0, 25, 0);
+  //allLEDsOn(0, 0, 0);
+
+  Serial.println("Ready!");
 }
 
 void loop() {
@@ -81,20 +103,84 @@ void loop() {
   artnet.read();
 }
 
+const int startUniverse = 1;  // CHANGE FOR YOUR SETUP most software this is 1, some software send out artnet first universe as 0.
+const int maxUniverses = 20;
 //int maxUniverse = 4;
+bool sendFrame = 1;
+bool universesReceived[maxUniverses];
+
+unsigned long prev = 0;
+int fps = 0;
 
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
 
-  //  Serial.print(universe);
-  // Serial.print("/");
-  // Serial.print(length);
-  // Serial.print("/");
-  // Serial.print(sequence);
-  // Serial.print("/");
-  // Serial.print(*data);
-  // Serial.println();
+  sendFrame = 1;
+
+  // Serial.print(
+
+  // Store which universe has got in
+  if ((universe - startUniverse) < maxUniverses) {
+    universesReceived[universe - startUniverse] = 1;
+    //Serial.print("stored: ");
+    //Serial.println(universe);
+  }
+
+
+  for (int i = 0; i < maxUniverses; i++) {
+    if (universesReceived[i] == 0) {
+      sendFrame = 0;
+      //Serial.print(i);
+      //Serial.print(": ");
+      //Serial.println(("0"));
+      break;
+    }
+  }
+
+  //    Serial.print(universe);
+  //   Serial.print("/");
+  //   Serial.print(length);
+  //   Serial.print("/");
+  //   Serial.print(sequence);
+  //   Serial.print("/");
+  //   Serial.print(*data);
+  //   Serial.println();
 
   length = 300;
+
+  if (sendFrame) {
+    //leds.show();
+    // Reset universeReceived to 0
+   // memset(universesReceived, 0, maxUniverses);
+
+    static unsigned long lastMillis;
+  static unsigned long frameCount;
+  static unsigned int framesPerSecond;
+  
+ //Serial.print(millis());
+  //Serial.print(" SEND ");
+   //Serial.println(frameCount);
+  // It is best if we declare millis() only once
+  unsigned long now = millis();
+  frameCount ++;
+  if (now - lastMillis >= 1 * 1000) {
+    framesPerSecond = frameCount / 1;
+   Serial.print("FPS: "); Serial.println(framesPerSecond);
+    frameCount = 0;
+    lastMillis = now;
+  }
+    
+//    if(millis() - prev >= 100)
+//    {
+//      prev = millis();
+//      Serial.print(millis());
+//      Serial.println(" SEND ");
+//      Serial.println(fps);
+//      fps = 0;
+//    } else {
+//      fps++;
+//    }
+    showLEDs();
+  }
 
   if (universe == 1) {
     for (unsigned int i = 0; i < length / 3; i++) {
@@ -110,7 +196,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       // Serial.print("/");
     }
     //Serial.println();
-    leds.show();
+    // leds.show();
   }
 
   if (universe == 2) {
@@ -118,7 +204,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds2.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds2.show();
+    // leds2.show();
   }
 
   if (universe == 3) {
@@ -126,7 +212,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds3.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds3.show();
+    // leds3.show();
   }
 
   if (universe == 4) {
@@ -134,7 +220,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds4.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds4.show();
+    // leds4.show();
   }
 
   if (universe == 5) {
@@ -142,7 +228,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds5.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds5.show();
+    // leds5.show();
   }
 
   if (universe == 6) {
@@ -150,7 +236,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds6.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds6.show();
+    // leds6.show();
   }
 
   if (universe == 7) {
@@ -158,7 +244,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds7.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds7.show();
+    // leds7.show();
   }
 
   if (universe == 8) {
@@ -166,7 +252,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds8.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds8.show();
+    // leds8.show();
   }
 
   if (universe == 9) {
@@ -174,7 +260,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds9.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds9.show();
+    // leds9.show();
   }
 
   if (universe == 10) {
@@ -182,15 +268,15 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds10.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds10.show();
+    //  leds10.show();
   }
 
-  if (universe == 511) {
+  if (universe == 11) {
     for (unsigned int i = 0; i < length / 3; i++) {
       int led = i + 1;
       leds11.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds11.show();
+    //  leds11.show();
   }
 
   if (universe == 12) {
@@ -198,7 +284,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds12.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds12.show();
+    // leds12.show();
   }
 
   if (universe == 13) {
@@ -206,7 +292,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds13.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds13.show();
+    // leds13.show();
   }
 
   if (universe == 14) {
@@ -214,7 +300,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds14.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds14.show();
+    // leds14.show();
   }
 
   if (universe == 15) {
@@ -222,7 +308,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds15.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds15.show();
+    // leds15.show();
   }
 
   if (universe == 16) {
@@ -230,7 +316,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds16.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds16.show();
+    // leds16.show();
   }
 
   if (universe == 17) {
@@ -238,7 +324,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds17.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds17.show();
+    // leds17.show();
   }
 
   if (universe == 18) {
@@ -246,7 +332,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds18.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds18.show();
+    // leds18.show();
   }
 
   if (universe == 19) {
@@ -254,7 +340,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds19.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds19.show();
+    // leds19.show();
   }
 
   if (universe == 20) {
@@ -262,7 +348,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds20.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds20.show();
+    // leds20.show();
   }
 
   if (universe == 21) {
@@ -270,7 +356,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds21.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds21.show();
+    //  leds21.show();
   }
 
   if (universe == 22) {
@@ -278,7 +364,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds22.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds22.show();
+    //  leds22.show();
   }
 
   if (universe == 23) {
@@ -286,7 +372,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds23.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds23.show();
+    // leds23.show();
   }
 
   if (universe == 24) {
@@ -294,7 +380,7 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds24.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds24.show();
+    // leds24.show();
   }
 
   if (universe == 25) {
@@ -302,60 +388,121 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
       int led = i + 1;
       leds25.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     }
-    leds25.show();
+    //leds25.show();
   }
+
+//  if (universe == 26) {
+//    for (unsigned int i = 0; i < length / 3; i++) {
+//      int led = i + 1;
+//      leds26.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    }
+//    //leds25.show();
+//  }
+//
+//  if (universe == 27) {
+//    for (unsigned int i = 0; i < length / 3; i++) {
+//      int led = i + 1;
+//      leds27.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    }
+//    //leds25.show();
+//  }
+//
+//  if (universe == 28) {
+//    for (unsigned int i = 0; i < length / 3; i++) {
+//      int led = i + 1;
+//      leds28.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    }
+//    //leds25.show();
+//  }
+//
+//  if (universe == 29) {
+//    for (unsigned int i = 0; i < length / 3; i++) {
+//      int led = i + 1;
+//      leds29.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    }
+//    //leds25.show();
+//  }
+//
+//  if (universe == 30) {
+//    for (unsigned int i = 0; i < length / 3; i++) {
+//      int led = i + 1;
+//      leds30.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    }
+//    //leds25.show();
+//  }
+//
+//  if (universe == 31) {
+//    for (unsigned int i = 0; i < length / 3; i++) {
+//      int led = i + 1;
+//      leds31.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    }
+//    //leds25.show();
+//  }
+//
+//  if (universe == 32) {
+//    for (unsigned int i = 0; i < length / 3; i++) {
+//      int led = i + 1;
+//      leds32.setPixelColor(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    }
+    //leds25.show();
+ // }
+//
+//  if (universe == maxSyncUniverse)
+//  {
+//    showLEDs();
+//  }
 }
 
-void initTest() {
-  for (int i = 0; i < numLeds; i++) {
-    leds.setPixelColor(i, 20, 0, 0);
-    leds.show();
-    leds2.setPixelColor(i, 20, 0, 0);
-    leds2.show();
-    leds3.setPixelColor(i, 20, 0, 0);
-    leds3.show();
-  }
+// void initTest() {
+//   for (int i = 0; i < numLeds; i++) {
+//     leds.setPixelColor(i, 20, 0, 0);
+//     leds.show();
+//     leds2.setPixelColor(i, 20, 0, 0);
+//     leds2.show();
+//     leds3.setPixelColor(i, 20, 0, 0);
+//     leds3.show();
+//   }
 
-  delay(500);
+//   delay(500);
 
-  for (int i = 0; i < numLeds; i++)
-    leds.setPixelColor(i, 0, 127, 0);
-  leds.show();
-  delay(500);
-  for (int i = 0; i < numLeds; i++)
-    leds.setPixelColor(i, 0, 0, 127);
-  leds.show();
-  delay(500);
-  for (int i = 0; i < numLeds; i++) {
+//   for (int i = 0; i < numLeds; i++)
+//     leds.setPixelColor(i, 0, 127, 0);
+//   leds.show();
+//   delay(500);
+//   for (int i = 0; i < numLeds; i++)
+//     leds.setPixelColor(i, 0, 0, 127);
+//   leds.show();
+//   delay(500);
+//   for (int i = 0; i < numLeds; i++) {
 
-    leds.setPixelColor(i, 0, 0, 0);
-    leds2.setPixelColor(i, 0, 0, 0);
-    leds3.setPixelColor(i, 0, 0, 0);
-    leds4.setPixelColor(i, 0, 0, 0);
-    leds5.setPixelColor(i, 0, 0, 0);
-    leds6.setPixelColor(i, 0, 0, 0);
-    leds7.setPixelColor(i, 0, 0, 0);
-    leds8.setPixelColor(i, 0, 0, 0);
-    leds9.setPixelColor(i, 0, 0, 0);
-    leds10.setPixelColor(i, 0, 0, 0);
-    leds11.setPixelColor(i, 0, 0, 0);
-    leds12.setPixelColor(i, 0, 0, 0);
-    leds13.setPixelColor(i, 0, 0, 0);
-    leds14.setPixelColor(i, 0, 0, 0);
-    leds15.setPixelColor(i, 0, 0, 0);
-    leds16.setPixelColor(i, 0, 0, 0);
-    leds17.setPixelColor(i, 0, 0, 0);
-    leds18.setPixelColor(i, 0, 0, 0);
-    leds19.setPixelColor(i, 0, 0, 0);
-    leds20.setPixelColor(i, 0, 0, 0);
-    leds21.setPixelColor(i, 0, 0, 0);
-    leds22.setPixelColor(i, 0, 0, 0);
-    leds23.setPixelColor(i, 0, 0, 0);
-    leds23.setPixelColor(i, 0, 0, 0);
-    leds25.setPixelColor(i, 0, 0, 0);
-  }
-  leds.show();
-}
+//     leds.setPixelColor(i, 0, 0, 0);
+//     leds2.setPixelColor(i, 0, 0, 0);
+//     leds3.setPixelColor(i, 0, 0, 0);
+//     leds4.setPixelColor(i, 0, 0, 0);
+//     leds5.setPixelColor(i, 0, 0, 0);
+//     leds6.setPixelColor(i, 0, 0, 0);
+//     leds7.setPixelColor(i, 0, 0, 0);
+//     leds8.setPixelColor(i, 0, 0, 0);
+//     leds9.setPixelColor(i, 0, 0, 0);
+//     leds10.setPixelColor(i, 0, 0, 0);
+//     leds11.setPixelColor(i, 0, 0, 0);
+//     leds12.setPixelColor(i, 0, 0, 0);
+//     leds13.setPixelColor(i, 0, 0, 0);
+//     leds14.setPixelColor(i, 0, 0, 0);
+//     leds15.setPixelColor(i, 0, 0, 0);
+//     leds16.setPixelColor(i, 0, 0, 0);
+//     leds17.setPixelColor(i, 0, 0, 0);
+//     leds18.setPixelColor(i, 0, 0, 0);
+//     leds19.setPixelColor(i, 0, 0, 0);
+//     leds20.setPixelColor(i, 0, 0, 0);
+//     leds21.setPixelColor(i, 0, 0, 0);
+//     leds22.setPixelColor(i, 0, 0, 0);
+//     leds23.setPixelColor(i, 0, 0, 0);
+//     leds23.setPixelColor(i, 0, 0, 0);
+//     leds25.setPixelColor(i, 0, 0, 0);
+//   }
+//   leds.show();
+// }
 
 void allLEDsOn(int redVal, int greenVal, int blueVal) {
   for (int i = 0; i < numLeds; i++) {
@@ -384,6 +531,13 @@ void allLEDsOn(int redVal, int greenVal, int blueVal) {
     leds23.setPixelColor(i, redVal, greenVal, blueVal);
     leds23.setPixelColor(i, redVal, greenVal, blueVal);
     leds25.setPixelColor(i, redVal, greenVal, blueVal);
+    leds26.setPixelColor(i, redVal, greenVal, blueVal);
+    leds27.setPixelColor(i, redVal, greenVal, blueVal);
+    leds28.setPixelColor(i, redVal, greenVal, blueVal);
+    leds29.setPixelColor(i, redVal, greenVal, blueVal);
+    leds30.setPixelColor(i, redVal, greenVal, blueVal);
+    leds31.setPixelColor(i, redVal, greenVal, blueVal);
+    leds32.setPixelColor(i, redVal, greenVal, blueVal);
 
     showLEDs();
   }

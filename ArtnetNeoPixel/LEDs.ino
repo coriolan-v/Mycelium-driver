@@ -25,6 +25,13 @@ void beginLEDs() {
   leds23.begin();
   leds24.begin();
   leds25.begin();
+//  leds26.begin();
+//  leds27.begin();
+//  leds28.begin();
+//  leds29.begin();
+//  leds30.begin();
+//  leds31.begin();
+//  leds32.begin();
 }
 
 void showLEDs() {
@@ -54,4 +61,11 @@ void showLEDs() {
   leds23.show();
   leds24.show();
   leds25.show();
+//  leds26.show();
+//  leds27.show();
+//  leds28.show();
+//  leds29.show();
+//  leds30.show();
+//  leds31.show();
+//  leds32.show();
 }
