@@ -7,7 +7,7 @@ This example may be copied under the terms of the MIT license, see the LICENSE f
 #include <Artnet.h>
 #include <NativeEthernet.h>
 #include <NativeEthernetUdp.h>
-#include <SPI.h>
+//#include <SPI.h>
 #include <OctoWS2811.h>
 
 
@@ -23,9 +23,10 @@ byte pinList[numPins] =   {
 const int ledsPerStrip = 100; // change for your setup
 const byte numStrips= 20; // change for your setup
 const int numLeds = ledsPerStrip * numStrips;
+const int bytesPerLED = 3;  // change to 4 if using RGBW
 const int numberOfChannels = numLeds * 3; // Total number of channels you want to receive (1 led = 3 channels)
-DMAMEM int displayMemory[ledsPerStrip*6];
-int drawingMemory[ledsPerStrip*6];
+DMAMEM int displayMemory[ledsPerStrip * numPins * bytesPerLED / 4];
+int drawingMemory[ledsPerStrip * numPins * bytesPerLED / 4];
 const int config = WS2811_GRB | WS2811_800kHz;
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config, numPins, pinList);
 
@@ -44,12 +45,15 @@ void setup()
   //Serial.begin(115200);
   artnet.setBroadcast(broadcast);
   artnet.begin(mac, ip);
-  //leds.begin();
-  //initTest();
+  
+
 
   // this will be called for each packet received
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.setArtSyncCallback(onSync);
+
+   leds.begin();
+  initTest();
 }
 
 void loop()
@@ -60,14 +64,24 @@ void loop()
 
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data, IPAddress remoteIP)
 {
+
+  Serial.println("_____");
+  Serial.print(universe);
+  Serial.print("/");
+  
   // read universe and put into the right part of the display buffer
-  for (int i = 0; i < length / 3; i++)
+  for (int i = 0; i < 100; i++)
   {
-    int led = i + (universe - startUniverse) * (previousDataLength / 3);
+    
+    int led = i + (universe - startUniverse) * (previousDataLength);
     if (led < numLeds)
+    {
+      Serial.println(led);
       leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+    }
+    
   }
-  previousDataLength = length;
+  previousDataLength = 100;
 }
 
 void onSync(IPAddress remoteIP) {
