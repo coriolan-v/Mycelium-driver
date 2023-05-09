@@ -37,7 +37,7 @@ void setup() {
    FastLED.addLeds<WS2811, 10, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 11, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 12, RGB>(leds, NUM_LEDS);
-   FastLED.addLeds<WS2811, 13, RGB>(leds, NUM_LEDS);
+   //FastLED.addLeds<WS2811, 13, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 14, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 15, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 16, RGB>(leds, NUM_LEDS);
@@ -46,8 +46,8 @@ void setup() {
    FastLED.addLeds<WS2811, 19, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 20, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 21, RGB>(leds, NUM_LEDS);
-   FastLED.addLeds<WS2811, 22, RGB>(leds, NUM_LEDS);
-   FastLED.addLeds<WS2811, 23, RGB>(leds, NUM_LEDS);
+   //FastLED.addLeds<WS2811, 22, RGB>(leds, NUM_LEDS);
+   //FastLED.addLeds<WS2811, 23, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 24, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 25, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 26, RGB>(leds, NUM_LEDS);
@@ -64,14 +64,14 @@ void setup() {
    FastLED.addLeds<WS2811, 37, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 38, RGB>(leds, NUM_LEDS);
    FastLED.addLeds<WS2811, 39, RGB>(leds, NUM_LEDS);
-  // FastLED.addLeds<WS2811, 40, RGB>(leds, NUM_LEDS);
-  //  FastLED.addLeds<WS2811, 41, RGB>(leds, NUM_LEDS);
-  //  FastLED.addLeds<WS2811, 49, RGB>(leds, NUM_LEDS);
-  //  FastLED.addLeds<WS2811, 50, RGB>(leds, NUM_LEDS);
-  //  FastLED.addLeds<WS2811, 51, RGB>(leds, NUM_LEDS);
-  //  FastLED.addLeds<WS2811, 52, RGB>(leds, NUM_LEDS);
-  //  FastLED.addLeds<WS2811, 53, RGB>(leds, NUM_LEDS);
-  //FastLED.addLeds<WS2811, 54, RGB>(leds, NUM_LEDS);
+   //FastLED.addLeds<WS2811, 40, RGB>(leds, NUM_LEDS);
+   // FastLED.addLeds<WS2811, 41, RGB>(leds, NUM_LEDS);
+//    FastLED.addLeds<WS2811, 49, RGB>(leds, NUM_LEDS);
+//    FastLED.addLeds<WS2811, 50, RGB>(leds, NUM_LEDS);
+//    FastLED.addLeds<WS2811, 51, RGB>(leds, NUM_LEDS);
+//    FastLED.addLeds<WS2811, 52, RGB>(leds, NUM_LEDS);
+//    FastLED.addLeds<WS2811, 53, RGB>(leds, NUM_LEDS);
+//  FastLED.addLeds<WS2811, 54, RGB>(leds, NUM_LEDS);
 
     // for(int i = 0; i<48; i++){
     //   FastLED.addLeds<WS2811, 1, RGB>(leds, NUM_LEDS);

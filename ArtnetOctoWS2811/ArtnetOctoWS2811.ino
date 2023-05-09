@@ -1,31 +1,32 @@
 /*
-This example will receive multiple universes via Artnet and control a strip of ws2811 leds via 
-Paul Stoffregen's excellent OctoWS2811 library: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
-This example may be copied under the terms of the MIT license, see the LICENSE file for details
+  This example will receive multiple universes via Artnet and control a strip of ws2811 leds via
+  Paul Stoffregen's excellent OctoWS2811 library: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
+  This example may be copied under the terms of the MIT license, see the LICENSE file for details
 */
 
 #include <Artnet.h>
 #include <NativeEthernet.h>
 #include <NativeEthernetUdp.h>
-#include <SPI.h>
+//#include <SPI.h>
 #include <OctoWS2811.h>
 
-const int numPins = 20;
-byte pinList[numPins] =   { 
+const int numPins = 32;
+byte pinList[numPins] =   {
   23, 22, 21, 20, 19, 18, 17, 16,
   15, 14, 41, 40, 39, 38, 37, 36,
-  0, 1, 2, 3//, 4, 5, 6, 7,
-  //8, 9, 10, 11, 12, 24, 25, 26
+  0, 1, 2, 3, 4, 5, 6, 7,
+  8, 9, 10, 11, 12, 24, 25, 26
 };
 
 
 // OctoWS2811 settings
 const int ledsPerStrip = 100;  // change for your setup
-const byte numStrips = 20;      // change for your setup
+const byte numStrips = 32;      // change for your setup
 const int numLeds = ledsPerStrip * numStrips;
 const int numberOfChannels = numLeds * 3;  // Total number of channels you want to receive (1 led = 3 channels)
-DMAMEM int displayMemory[ledsPerStrip * 6];
-int drawingMemory[ledsPerStrip * 6];
+const int bytesPerLED = 3;  // change to 4 if using RGBW
+DMAMEM int displayMemory[ledsPerStrip * numPins * bytesPerLED / 4];
+int drawingMemory[ledsPerStrip * numPins * bytesPerLED / 4];
 const int config = WS2811_GRB | WS2811_800kHz;
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config, numPins, pinList);
 // Artnet settings
@@ -59,10 +60,12 @@ void loop() {
   artnet.read();
 }
 
+
+int led = 0;
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
   sendFrame = 1;
 
- // Serial.print(
+  // Serial.print(
 
   // Store which universe has got in
   if ((universe - startUniverse) < maxUniverses) {
@@ -82,13 +85,142 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
     }
   }
 
-  // read universe and put into the right part of the display buffer
-  for (int i = 0; i < length / 3; i++) {
-    int led = i + (universe - startUniverse) * (previousDataLength / 3);
-    if (led < numLeds)
-      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //Serial.print("universe: ");
+//  Serial.print(universe);
+//  Serial.print("/");
+//  Serial.print(length);
+//  Serial.print("/");
+//  Serial.print(sequence);
+//  Serial.print("__");
+//  for(int i = 0; i<100; i++)
+//  {
+//    //leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    Serial.print(data[i * 3]);
+//    Serial.print("/");
+//    Serial.print(data[i * 3 + 1]);
+//    Serial.print("/");
+//    Serial.print(data[i * 3 + 2]);
+//    Serial.print("/");
+//   // led++;
+//  }
+
+
+  //  // read universe and put into the right part of the display buffer
+  //  for (int i = 0; i < length / 3; i++) {
+  //    int led = i + (universe - startUniverse) * (previousDataLength / 3);
+  //    if (led < numLeds)
+  //    {
+  //      Serial.print(led);
+  //      Serial.print("/");
+  //      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+  //    } else
+  //    {
+  //        Serial.print("led:");
+  //       Serial.print(led);
+  //    }
+  //  }
+  //  Serial.println();
+  //  previousDataLength = length;
+
+
+  led = universe * 100;
+  for(int i = 0; i<100; i++)
+  {
+    leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+    
+    //Serial.print(data[i * 3]);
+    //Serial.print("/");
+    led++;
   }
-  previousDataLength = length;
+
+
+//  if(universe == 0)
+//  {
+//    //Serial.printl
+//    
+//    led = 0;
+//    for(int i = 0; i<100; i++)
+//    {
+//      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//      
+//      //Serial.print(data[i * 3]);
+//      //Serial.print("/");
+//      led++;
+//    }
+//  }
+//
+//  if(universe == 1)
+//  {
+//     led = 100;
+//    for(int i = 0; i<100; i++)
+//    {
+//      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//      led++;
+//      //Serial.print(data[i * 3]);
+//      //Serial.print("/");
+//      //leds.setPixel(led, data[(i - 100) * 3], data[(i - 100) * 3 + 1], data[i * 3 + 2]);
+//    }
+//  }
+//
+//  if(universe == 9)
+//  {
+//    led = 800;
+//    for(int i = 0; i<100; i++)
+//    {
+//      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//      led++;
+//      //Serial.print(data[i * 3]);
+//      //Serial.print("/");
+//      //leds.setPixel(led, data[(i - 100) * 3], data[(i - 100) * 3 + 1], data[i * 3 + 2]);
+//    }
+//  }
+//
+//  if(universe == 12)
+//  {
+//    led = 1100;
+//    for(int i = 0; i<100; i++)
+//    {
+//      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//      led++;
+//      //Serial.print(data[i * 3]);
+//      //Serial.print("/");
+//      //leds.setPixel(led, data[(i - 100) * 3], data[(i - 100) * 3 + 1], data[i * 3 + 2]);
+//    }
+//  }
+//
+//  if(universe == 19)
+//  {
+//    led = 1900;
+//    for(int i = 0; i<100; i++)
+//    {
+//      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//      led++;
+//      //Serial.print(data[i * 3]);
+//      //Serial.print("/");
+//      //leds.setPixel(led, data[(i - 100) * 3], data[(i - 100) * 3 + 1], data[i * 3 + 2]);
+//    }
+//  }
+//
+//  Serial.println();
+
+  // read universe and put into the right part of the display buffer
+//  for (int i = 0; i < length / 3; i++) {
+//    int led = i + (universe - startUniverse) * (previousDataLength / 3);
+//    if (led < 10240)
+//    {
+//      Serial.print(led);
+//      Serial.print("/");
+//      leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
+//    } else
+//    {
+//      Serial.print("led:");
+//      Serial.print(led);
+//    }
+//  }
+//  Serial.println();
+//  previousDataLength = length;
+
+
 
   if (sendFrame) {
     leds.show();
@@ -112,5 +244,11 @@ void initTest() {
   delay(500);
   for (int i = 0; i < numLeds; i++)
     leds.setPixel(i, 0, 0, 0);
+  leds.show();
+
+  for(int i = 800; i < 900; i++)
+  {
+    leds.setPixel(i, 10, 10, 10);
+  }
   leds.show();
 }
