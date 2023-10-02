@@ -1,0 +1,3 @@
+Change Component Designator: OldDesignator=IC? NewDesignator=IC1
+Change Component Designator: OldDesignator=IC? NewDesignator=IC2
+Added Member To Class: ClassName=Sheet1 Member=Component IC2 SN74HCT245PWR

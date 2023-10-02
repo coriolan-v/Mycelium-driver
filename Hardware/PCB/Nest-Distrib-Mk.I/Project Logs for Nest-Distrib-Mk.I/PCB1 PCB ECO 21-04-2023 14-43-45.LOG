@@ -1,0 +1,25 @@
+Removed Pin From Net: NetName=+5 Pin=C?-1
+Removed Pin From Net: NetName=+12 Pin=C?-1
+Removed Pin From Net: NetName=GND Pin=PS?-1
+Removed Pin From Net: NetName=+5 Pin=PS?-2
+Removed Pin From Net: NetName=+12 Pin=PS?-3
+Removed Member From Class: ClassName=Sheet1 Member=PS?
+Added Pin To Net: NetName=+5 Pin=C?-1
+Added Pin To Net: NetName=+12 Pin=C?-1
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component ICF 74HCT245D
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? CLP-104-02-F-D-BE-A-K
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110002

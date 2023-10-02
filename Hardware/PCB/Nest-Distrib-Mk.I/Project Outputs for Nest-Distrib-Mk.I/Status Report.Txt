@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Nest-Distrib-Mk.I.PrjPcb]
+   Generated File[Nest-Distrib.TXT]
+   Generated File[Nest-Distrib.LDP]
+   Generated File[Nest-Distrib.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 13:07:40 On 22/04/2023

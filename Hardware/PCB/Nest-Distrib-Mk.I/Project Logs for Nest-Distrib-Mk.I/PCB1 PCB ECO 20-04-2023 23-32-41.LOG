@@ -1,0 +1,114 @@
+Added Pin To Net: NetName=GND Pin=B1-45
+Added Pin To Net: NetName=GND Pin=B1-48
+Added Pin To Net: NetName=GND Pin=B1-49
+Added Pin To Net: NetName=GND Pin=B1-69
+Added Pin To Net: NetName=GND Pin=B1-70
+Added Pin To Net: NetName=GND Pin=B1-71
+Added Pin To Net: NetName=A_1 Pin=IC1-2
+Added Net: Name=A_1
+Added Pin To Net: NetName=A_2 Pin=IC1-3
+Added Net: Name=A_2
+Added Pin To Net: NetName=A_3 Pin=IC1-4
+Added Net: Name=A_3
+Added Pin To Net: NetName=A_4 Pin=IC1-5
+Added Net: Name=A_4
+Added Pin To Net: NetName=A_5 Pin=IC1-6
+Added Net: Name=A_5
+Added Pin To Net: NetName=A_6 Pin=IC1-7
+Added Net: Name=A_6
+Added Pin To Net: NetName=A_7 Pin=IC1-8
+Added Net: Name=A_7
+Added Pin To Net: NetName=A_8 Pin=IC1-9
+Added Net: Name=A_8
+Added Pin To Net: NetName=B_1 Pin=IC2-2
+Added Net: Name=B_1
+Added Pin To Net: NetName=B_2 Pin=IC2-3
+Added Net: Name=B_2
+Added Pin To Net: NetName=B_3 Pin=IC2-4
+Added Net: Name=B_3
+Added Pin To Net: NetName=B_4 Pin=IC2-5
+Added Net: Name=B_4
+Added Pin To Net: NetName=B_5 Pin=IC2-6
+Added Net: Name=B_5
+Added Pin To Net: NetName=B_6 Pin=IC2-7
+Added Net: Name=B_6
+Added Pin To Net: NetName=B_7 Pin=IC2-8
+Added Net: Name=B_7
+Added Pin To Net: NetName=B_8 Pin=IC2-9
+Added Net: Name=B_8
+Added Pin To Net: NetName=C_1 Pin=IC3-2
+Added Net: Name=C_1
+Added Pin To Net: NetName=C_2 Pin=IC3-3
+Added Net: Name=C_2
+Added Pin To Net: NetName=C_3 Pin=IC3-4
+Added Net: Name=C_3
+Added Pin To Net: NetName=C_4 Pin=IC3-5
+Added Net: Name=C_4
+Added Pin To Net: NetName=C_5 Pin=IC3-6
+Added Net: Name=C_5
+Added Pin To Net: NetName=C_6 Pin=IC3-7
+Added Net: Name=C_6
+Added Pin To Net: NetName=C_7 Pin=IC3-8
+Added Net: Name=C_7
+Added Pin To Net: NetName=C_8 Pin=IC3-9
+Added Net: Name=C_8
+Added Pin To Net: NetName=D_1 Pin=IC4-2
+Added Net: Name=D_1
+Added Pin To Net: NetName=D_2 Pin=IC4-3
+Added Net: Name=D_2
+Added Pin To Net: NetName=D_3 Pin=IC4-4
+Added Net: Name=D_3
+Added Pin To Net: NetName=D_4 Pin=IC4-5
+Added Net: Name=D_4
+Added Pin To Net: NetName=D_5 Pin=IC4-6
+Added Net: Name=D_5
+Added Pin To Net: NetName=D_6 Pin=IC4-7
+Added Net: Name=D_6
+Added Pin To Net: NetName=D_7 Pin=IC4-8
+Added Net: Name=D_7
+Added Pin To Net: NetName=D_8 Pin=IC4-9
+Added Net: Name=D_8
+Added Pin To Net: NetName=E_1 Pin=IC5-2
+Added Net: Name=E_1
+Added Pin To Net: NetName=E_2 Pin=IC5-3
+Added Net: Name=E_2
+Added Pin To Net: NetName=E_3 Pin=IC5-4
+Added Net: Name=E_3
+Added Pin To Net: NetName=E_4 Pin=IC5-5
+Added Net: Name=E_4
+Added Pin To Net: NetName=E_5 Pin=IC5-6
+Added Net: Name=E_5
+Added Pin To Net: NetName=E_6 Pin=IC5-7
+Added Net: Name=E_6
+Added Pin To Net: NetName=E_7 Pin=IC5-8
+Added Net: Name=E_7
+Added Pin To Net: NetName=E_8 Pin=IC5-9
+Added Net: Name=E_8
+Added Pin To Net: NetName=F_1 Pin=IC6-2
+Added Net: Name=F_1
+Added Pin To Net: NetName=F_2 Pin=IC6-3
+Added Net: Name=F_2
+Added Pin To Net: NetName=F_3 Pin=IC6-4
+Added Net: Name=F_3
+Added Pin To Net: NetName=F_4 Pin=IC6-5
+Added Net: Name=F_4
+Added Pin To Net: NetName=F_5 Pin=IC6-6
+Added Net: Name=F_5
+Added Pin To Net: NetName=F_6 Pin=IC6-7
+Added Net: Name=F_6
+Added Pin To Net: NetName=F_7 Pin=IC6-8
+Added Net: Name=F_7
+Added Pin To Net: NetName=F_8 Pin=IC6-9
+Added Net: Name=F_8
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110002

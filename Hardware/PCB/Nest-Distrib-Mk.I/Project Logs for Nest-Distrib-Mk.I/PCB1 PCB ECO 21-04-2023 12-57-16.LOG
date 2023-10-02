@@ -1,0 +1,155 @@
+Change Component Designator: OldDesignator=IC? NewDesignator=ICA
+Change Component Designator: OldDesignator=IC? NewDesignator=ICB
+Change Component Designator: OldDesignator=IC? NewDesignator=ICC
+Change Component Designator: OldDesignator=IC? NewDesignator=ICD
+Change Component Designator: OldDesignator=IC? NewDesignator=ICE
+Change Component Designator: OldDesignator=IC? NewDesignator=ICF
+Change Net Name : Old Net Name=NetIC?_11 New Net Name=NetICF_11
+Change Net Name : Old Net Name=NetIC?_12 New Net Name=NetICF_12
+Change Net Name : Old Net Name=NetIC?_13 New Net Name=NetICF_13
+Change Net Name : Old Net Name=NetIC?_14 New Net Name=NetICF_14
+Change Net Name : Old Net Name=NetIC?_15 New Net Name=NetICF_15
+Change Net Name : Old Net Name=NetIC?_16 New Net Name=NetICF_16
+Change Net Name : Old Net Name=NetIC?_17 New Net Name=NetICF_17
+Change Net Name : Old Net Name=NetIC?_18 New Net Name=NetICF_18
+Added Pin To Net: NetName=NetICA_11 Pin=ICA-11
+Added Pin To Net: NetName=NetICA_11 Pin=R16-1
+Added Net: Name=NetICA_11
+Added Pin To Net: NetName=NetICA_12 Pin=ICA-12
+Added Pin To Net: NetName=NetICA_12 Pin=R15-1
+Added Net: Name=NetICA_12
+Added Pin To Net: NetName=NetICA_13 Pin=ICA-13
+Added Pin To Net: NetName=NetICA_13 Pin=R13-1
+Added Net: Name=NetICA_13
+Added Pin To Net: NetName=NetICA_14 Pin=ICA-14
+Added Pin To Net: NetName=NetICA_14 Pin=R11-1
+Added Net: Name=NetICA_14
+Added Pin To Net: NetName=NetICA_15 Pin=ICA-15
+Added Pin To Net: NetName=NetICA_15 Pin=R9-1
+Added Net: Name=NetICA_15
+Added Pin To Net: NetName=NetICA_16 Pin=ICA-16
+Added Pin To Net: NetName=NetICA_16 Pin=R7-1
+Added Net: Name=NetICA_16
+Added Pin To Net: NetName=NetICA_17 Pin=ICA-17
+Added Pin To Net: NetName=NetICA_17 Pin=R5-1
+Added Net: Name=NetICA_17
+Added Pin To Net: NetName=NetICA_18 Pin=ICA-18
+Added Pin To Net: NetName=NetICA_18 Pin=R3-1
+Added Net: Name=NetICA_18
+Added Pin To Net: NetName=NetICB_11 Pin=ICB-11
+Added Pin To Net: NetName=NetICB_11 Pin=R14-1
+Added Net: Name=NetICB_11
+Added Pin To Net: NetName=NetICB_12 Pin=ICB-12
+Added Pin To Net: NetName=NetICB_12 Pin=R12-1
+Added Net: Name=NetICB_12
+Added Pin To Net: NetName=NetICB_13 Pin=ICB-13
+Added Pin To Net: NetName=NetICB_13 Pin=R10-1
+Added Net: Name=NetICB_13
+Added Pin To Net: NetName=NetICB_14 Pin=ICB-14
+Added Pin To Net: NetName=NetICB_14 Pin=R8-1
+Added Net: Name=NetICB_14
+Added Pin To Net: NetName=NetICB_15 Pin=ICB-15
+Added Pin To Net: NetName=NetICB_15 Pin=R6-1
+Added Net: Name=NetICB_15
+Added Pin To Net: NetName=NetICB_16 Pin=ICB-16
+Added Pin To Net: NetName=NetICB_16 Pin=R4-1
+Added Net: Name=NetICB_16
+Added Pin To Net: NetName=NetICB_17 Pin=ICB-17
+Added Pin To Net: NetName=NetICB_17 Pin=R2-1
+Added Net: Name=NetICB_17
+Added Pin To Net: NetName=NetICB_18 Pin=ICB-18
+Added Pin To Net: NetName=NetICB_18 Pin=R1-1
+Added Net: Name=NetICB_18
+Added Pin To Net: NetName=NetICC_11 Pin=ICC-11
+Added Pin To Net: NetName=NetICC_11 Pin=R30-1
+Added Net: Name=NetICC_11
+Added Pin To Net: NetName=NetICC_12 Pin=ICC-12
+Added Pin To Net: NetName=NetICC_12 Pin=R28-1
+Added Net: Name=NetICC_12
+Added Pin To Net: NetName=NetICC_13 Pin=ICC-13
+Added Pin To Net: NetName=NetICC_13 Pin=R26-1
+Added Net: Name=NetICC_13
+Added Pin To Net: NetName=NetICC_14 Pin=ICC-14
+Added Pin To Net: NetName=NetICC_14 Pin=R24-1
+Added Net: Name=NetICC_14
+Added Pin To Net: NetName=NetICC_15 Pin=ICC-15
+Added Pin To Net: NetName=NetICC_15 Pin=R22-1
+Added Net: Name=NetICC_15
+Added Pin To Net: NetName=NetICC_16 Pin=ICC-16
+Added Pin To Net: NetName=NetICC_16 Pin=R20-1
+Added Net: Name=NetICC_16
+Added Pin To Net: NetName=NetICC_17 Pin=ICC-17
+Added Pin To Net: NetName=NetICC_17 Pin=R18-1
+Added Net: Name=NetICC_17
+Added Pin To Net: NetName=NetICC_18 Pin=ICC-18
+Added Pin To Net: NetName=NetICC_18 Pin=R17-1
+Added Net: Name=NetICC_18
+Added Pin To Net: NetName=NetICD_11 Pin=ICD-11
+Added Pin To Net: NetName=NetICD_11 Pin=R32-1
+Added Net: Name=NetICD_11
+Added Pin To Net: NetName=NetICD_12 Pin=ICD-12
+Added Pin To Net: NetName=NetICD_12 Pin=R31-1
+Added Net: Name=NetICD_12
+Added Pin To Net: NetName=NetICD_13 Pin=ICD-13
+Added Pin To Net: NetName=NetICD_13 Pin=R29-1
+Added Net: Name=NetICD_13
+Added Pin To Net: NetName=NetICD_14 Pin=ICD-14
+Added Pin To Net: NetName=NetICD_14 Pin=R27-1
+Added Net: Name=NetICD_14
+Added Pin To Net: NetName=NetICD_15 Pin=ICD-15
+Added Pin To Net: NetName=NetICD_15 Pin=R25-1
+Added Net: Name=NetICD_15
+Added Pin To Net: NetName=NetICD_16 Pin=ICD-16
+Added Pin To Net: NetName=NetICD_16 Pin=R23-1
+Added Net: Name=NetICD_16
+Added Pin To Net: NetName=NetICD_17 Pin=ICD-17
+Added Pin To Net: NetName=NetICD_17 Pin=R21-1
+Added Net: Name=NetICD_17
+Added Pin To Net: NetName=NetICD_18 Pin=ICD-18
+Added Pin To Net: NetName=NetICD_18 Pin=R19-1
+Added Net: Name=NetICD_18
+Added Pin To Net: NetName=NetICE_11 Pin=ICE-11
+Added Pin To Net: NetName=NetICE_11 Pin=R45-1
+Added Net: Name=NetICE_11
+Added Pin To Net: NetName=NetICE_12 Pin=ICE-12
+Added Pin To Net: NetName=NetICE_12 Pin=R43-1
+Added Net: Name=NetICE_12
+Added Pin To Net: NetName=NetICE_13 Pin=ICE-13
+Added Pin To Net: NetName=NetICE_13 Pin=R41-1
+Added Net: Name=NetICE_13
+Added Pin To Net: NetName=NetICE_14 Pin=ICE-14
+Added Pin To Net: NetName=NetICE_14 Pin=R39-1
+Added Net: Name=NetICE_14
+Added Pin To Net: NetName=NetICE_15 Pin=ICE-15
+Added Pin To Net: NetName=NetICE_15 Pin=R37-1
+Added Net: Name=NetICE_15
+Added Pin To Net: NetName=NetICE_16 Pin=ICE-16
+Added Pin To Net: NetName=NetICE_16 Pin=R35-1
+Added Net: Name=NetICE_16
+Added Pin To Net: NetName=NetICE_17 Pin=ICE-17
+Added Pin To Net: NetName=NetICE_17 Pin=R34-1
+Added Net: Name=NetICE_17
+Added Pin To Net: NetName=NetICE_18 Pin=ICE-18
+Added Pin To Net: NetName=NetICE_18 Pin=R33-1
+Added Net: Name=NetICE_18
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component ICA 74HCT245D
+Added Member To Class: ClassName=Sheet1 Member=Component ICB 74HCT245D
+Added Member To Class: ClassName=Sheet1 Member=Component ICC 74HCT245D
+Added Member To Class: ClassName=Sheet1 Member=Component ICD 74HCT245D
+Added Member To Class: ClassName=Sheet1 Member=Component ICE 74HCT245D
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110002
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? CLP-104-02-F-D-BE-A-K
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008

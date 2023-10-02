@@ -1,0 +1,138 @@
+Change Net Name : Old Net Name=NetJ?_1 New Net Name=N9
+Change Net Name : Old Net Name=NetJ?_2 New Net Name=N18
+Change Net Name : Old Net Name=NetJ?_3 New Net Name=N11
+Change Net Name : Old Net Name=NetJ?_4 New Net Name=N44
+Change Net Name : Old Net Name=NetJ?_5 New Net Name=N29
+Change Net Name : Old Net Name=NetJ?_6 New Net Name=N46
+Change Net Name : Old Net Name=NetJ?_7 New Net Name=N15
+Change Net Name : Old Net Name=NetJ?_8 New Net Name=N48
+Added Pin To Net: NetName=N1 Pin=J?-1
+Added Pin To Net: NetName=N1 Pin=R1-2
+Added Net: Name=N1
+Added Pin To Net: NetName=N2 Pin=J?-2
+Added Pin To Net: NetName=N2 Pin=R2-2
+Added Net: Name=N2
+Added Pin To Net: NetName=N3 Pin=J?-3
+Added Pin To Net: NetName=N3 Pin=R4-2
+Added Net: Name=N3
+Added Pin To Net: NetName=N4 Pin=J?-4
+Added Pin To Net: NetName=N4 Pin=R6-2
+Added Net: Name=N4
+Added Pin To Net: NetName=N5 Pin=J?-5
+Added Pin To Net: NetName=N5 Pin=R8-2
+Added Net: Name=N5
+Added Pin To Net: NetName=N6 Pin=J?-6
+Added Pin To Net: NetName=N6 Pin=R10-2
+Added Net: Name=N6
+Added Pin To Net: NetName=N7 Pin=J?-7
+Added Pin To Net: NetName=N7 Pin=R12-2
+Added Net: Name=N7
+Added Pin To Net: NetName=N8 Pin=J?-8
+Added Pin To Net: NetName=N8 Pin=R14-2
+Added Net: Name=N8
+Added Pin To Net: NetName=N10 Pin=J?-2
+Added Pin To Net: NetName=N10 Pin=R18-2
+Added Net: Name=N10
+Added Pin To Net: NetName=N12 Pin=J?-4
+Added Pin To Net: NetName=N12 Pin=R22-2
+Added Net: Name=N12
+Added Pin To Net: NetName=N13 Pin=J?-5
+Added Pin To Net: NetName=N13 Pin=R24-2
+Added Net: Name=N13
+Added Pin To Net: NetName=N14 Pin=J?-6
+Added Pin To Net: NetName=N14 Pin=R26-2
+Added Net: Name=N14
+Added Pin To Net: NetName=N16 Pin=J?-8
+Added Pin To Net: NetName=N16 Pin=R30-2
+Added Net: Name=N16
+Added Pin To Net: NetName=N17 Pin=J?-1
+Added Pin To Net: NetName=N17 Pin=R36-2
+Added Net: Name=N17
+Added Pin To Net: NetName=N19 Pin=J?-3
+Added Pin To Net: NetName=N19 Pin=R40-2
+Added Net: Name=N19
+Added Pin To Net: NetName=N20 Pin=J?-4
+Added Pin To Net: NetName=N20 Pin=R42-2
+Added Net: Name=N20
+Added Pin To Net: NetName=N21 Pin=J?-5
+Added Pin To Net: NetName=N21 Pin=R44-2
+Added Net: Name=N21
+Added Pin To Net: NetName=N22 Pin=J?-6
+Added Pin To Net: NetName=N22 Pin=R46-2
+Added Net: Name=N22
+Added Pin To Net: NetName=N23 Pin=J?-7
+Added Pin To Net: NetName=N23 Pin=R47-2
+Added Net: Name=N23
+Added Pin To Net: NetName=N24 Pin=J?-8
+Added Pin To Net: NetName=N24 Pin=R48-2
+Added Net: Name=N24
+Added Pin To Net: NetName=N25 Pin=J?-1
+Added Pin To Net: NetName=N25 Pin=R3-2
+Added Net: Name=N25
+Added Pin To Net: NetName=N26 Pin=J?-2
+Added Pin To Net: NetName=N26 Pin=R5-2
+Added Net: Name=N26
+Added Pin To Net: NetName=N27 Pin=J?-3
+Added Pin To Net: NetName=N27 Pin=R7-2
+Added Net: Name=N27
+Added Pin To Net: NetName=N28 Pin=J?-4
+Added Pin To Net: NetName=N28 Pin=R9-2
+Added Net: Name=N28
+Added Pin To Net: NetName=N30 Pin=J?-6
+Added Pin To Net: NetName=N30 Pin=R13-2
+Added Net: Name=N30
+Added Pin To Net: NetName=N31 Pin=J?-7
+Added Pin To Net: NetName=N31 Pin=R15-2
+Added Net: Name=N31
+Added Pin To Net: NetName=N32 Pin=J?-8
+Added Pin To Net: NetName=N32 Pin=R16-2
+Added Net: Name=N32
+Added Pin To Net: NetName=N33 Pin=J?-1
+Added Pin To Net: NetName=N33 Pin=R19-2
+Added Net: Name=N33
+Added Pin To Net: NetName=N34 Pin=J?-2
+Added Pin To Net: NetName=N34 Pin=R21-2
+Added Net: Name=N34
+Added Pin To Net: NetName=N35 Pin=J?-3
+Added Pin To Net: NetName=N35 Pin=R23-2
+Added Net: Name=N35
+Added Pin To Net: NetName=N36 Pin=J?-4
+Added Pin To Net: NetName=N36 Pin=R25-2
+Added Net: Name=N36
+Added Pin To Net: NetName=N37 Pin=J?-5
+Added Pin To Net: NetName=N37 Pin=R27-2
+Added Net: Name=N37
+Added Pin To Net: NetName=N38 Pin=J?-6
+Added Pin To Net: NetName=N38 Pin=R29-2
+Added Net: Name=N38
+Added Pin To Net: NetName=N39 Pin=J?-7
+Added Pin To Net: NetName=N39 Pin=R31-2
+Added Net: Name=N39
+Added Pin To Net: NetName=N40 Pin=J?-8
+Added Pin To Net: NetName=N40 Pin=R32-2
+Added Net: Name=N40
+Added Pin To Net: NetName=N41 Pin=J?-1
+Added Pin To Net: NetName=N41 Pin=R33-2
+Added Net: Name=N41
+Added Pin To Net: NetName=N42 Pin=J?-2
+Added Pin To Net: NetName=N42 Pin=R34-2
+Added Net: Name=N42
+Added Pin To Net: NetName=N43 Pin=J?-3
+Added Pin To Net: NetName=N43 Pin=R35-2
+Added Net: Name=N43
+Added Pin To Net: NetName=N45 Pin=J?-5
+Added Pin To Net: NetName=N45 Pin=R39-2
+Added Net: Name=N45
+Added Pin To Net: NetName=N47 Pin=J?-7
+Added Pin To Net: NetName=N47 Pin=R43-2
+Added Net: Name=N47
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008

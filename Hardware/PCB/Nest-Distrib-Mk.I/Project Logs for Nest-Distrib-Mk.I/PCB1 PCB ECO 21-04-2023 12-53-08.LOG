@@ -1,0 +1,65 @@
+Removed Pin From Net: NetName=+5 Pin=IC6-1
+Removed Pin From Net: NetName=F_1 Pin=IC6-2
+Removed Pin From Net: NetName=F_2 Pin=IC6-3
+Removed Pin From Net: NetName=F_3 Pin=IC6-4
+Removed Pin From Net: NetName=F_4 Pin=IC6-5
+Removed Pin From Net: NetName=F_5 Pin=IC6-6
+Removed Pin From Net: NetName=F_6 Pin=IC6-7
+Removed Pin From Net: NetName=F_7 Pin=IC6-8
+Removed Pin From Net: NetName=F_8 Pin=IC6-9
+Removed Pin From Net: NetName=GND Pin=IC6-10
+Removed Pin From Net: NetName=GND Pin=IC6-19
+Removed Pin From Net: NetName=+5 Pin=IC6-20
+Removed Member From Class: ClassName=Sheet1 Member=IC6
+Added Pin To Net: NetName=+5 Pin=IC?-1
+Added Pin To Net: NetName=F_1 Pin=IC?-2
+Added Pin To Net: NetName=F_2 Pin=IC?-3
+Added Pin To Net: NetName=F_3 Pin=IC?-4
+Added Pin To Net: NetName=F_4 Pin=IC?-5
+Added Pin To Net: NetName=F_5 Pin=IC?-6
+Added Pin To Net: NetName=F_6 Pin=IC?-7
+Added Pin To Net: NetName=F_7 Pin=IC?-8
+Added Pin To Net: NetName=F_8 Pin=IC?-9
+Added Pin To Net: NetName=GND Pin=IC?-10
+Added Pin To Net: NetName=GND Pin=IC?-19
+Added Pin To Net: NetName=+5 Pin=IC?-20
+Added Pin To Net: NetName=NetIC?_11 Pin=IC?-11
+Added Pin To Net: NetName=NetIC?_11 Pin=R48-1
+Added Net: Name=NetIC?_11
+Added Pin To Net: NetName=NetIC?_12 Pin=IC?-12
+Added Pin To Net: NetName=NetIC?_12 Pin=R47-1
+Added Net: Name=NetIC?_12
+Added Pin To Net: NetName=NetIC?_13 Pin=IC?-13
+Added Pin To Net: NetName=NetIC?_13 Pin=R46-1
+Added Net: Name=NetIC?_13
+Added Pin To Net: NetName=NetIC?_14 Pin=IC?-14
+Added Pin To Net: NetName=NetIC?_14 Pin=R44-1
+Added Net: Name=NetIC?_14
+Added Pin To Net: NetName=NetIC?_15 Pin=IC?-15
+Added Pin To Net: NetName=NetIC?_15 Pin=R42-1
+Added Net: Name=NetIC?_15
+Added Pin To Net: NetName=NetIC?_16 Pin=IC?-16
+Added Pin To Net: NetName=NetIC?_16 Pin=R40-1
+Added Net: Name=NetIC?_16
+Added Pin To Net: NetName=NetIC?_17 Pin=IC?-17
+Added Pin To Net: NetName=NetIC?_17 Pin=R38-1
+Added Net: Name=NetIC?_17
+Added Pin To Net: NetName=NetIC?_18 Pin=IC?-18
+Added Pin To Net: NetName=NetIC?_18 Pin=R36-1
+Added Net: Name=NetIC?_18
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? CLP-104-02-F-D-BE-A-K
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110002

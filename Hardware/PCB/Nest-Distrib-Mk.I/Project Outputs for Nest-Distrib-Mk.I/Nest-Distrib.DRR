@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Nest-Distrib.PcbDoc   22/04/2023  13:07:40
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Nest-Distrib.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      28mil (0.711mm)                                           Round             28        PTH        12.86inch (326.59mm)
+T2      37mil (0.95mm)                                            Round             8         PTH        0.70inch (17.78mm)
+T3      44mil (1.11mm)                                            Round             59        PTH        8.46inch (214.82mm)
+T4      53mil (1.35mm)                                            Round             66        PTH        21.53inch (546.85mm)
+T5      56mil (1.42mm)                                            Round             3         PTH        0.20inch (5.10mm)
+T6      126mil (3.2mm)                                            Round             11        PTH        15.96inch (405.39mm)
+T7      29mil (0.74mm)                                            Round             20        NPTH       0.90inch (22.91mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              195
+
+Total Processing Time (hh:mm:ss) : 00:00:00

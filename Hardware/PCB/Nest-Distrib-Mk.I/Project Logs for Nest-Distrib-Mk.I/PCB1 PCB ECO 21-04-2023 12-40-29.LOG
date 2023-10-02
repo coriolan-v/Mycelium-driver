@@ -1,0 +1,42 @@
+Removed Pin From Net: NetName=GND Pin=JBOTTOM-8
+Removed Pin From Net: NetName=B_8 Pin=JTOP-2
+Removed Pin From Net: NetName=B_7 Pin=JTOP-3
+Removed Pin From Net: NetName=A_1 Pin=JTOP-4
+Removed Pin From Net: NetName=B_6 Pin=JTOP-5
+Removed Pin From Net: NetName=A_2 Pin=JTOP-6
+Removed Pin From Net: NetName=B_5 Pin=JTOP-7
+Removed Pin From Net: NetName=GND Pin=JTOP-8
+Removed Member From Class: ClassName=Sheet1 Member=JBOTTOM
+Removed Member From Class: ClassName=Sheet1 Member=JTOP
+Added Component: Designator=J?(CLP-104-02-XXX-D-BE-A-K)
+Add component (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "http://suddendocs.samtec.com/prints/erm8-xxx-xx.x-xxx-dv-xxxx-xx-mkt.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "SAMTEC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "CLP-104-02-F-D-BE-A-K"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=B_8 Pin=J?-1
+Added Pin To Net: NetName=A_1 Pin=J?-3
+Added Pin To Net: NetName=B_7 Pin=J?-4
+Added Pin To Net: NetName=A_2 Pin=J?-5
+Added Pin To Net: NetName=B_6 Pin=J?-6
+Added Pin To Net: NetName=GND Pin=J?-7
+Added Pin To Net: NetName=GND Pin=J?-7
+Added Pin To Net: NetName=B_5 Pin=J?-8
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component C? 06034D106KAT2A
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110002
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? 691322110008
+Added Member To Class: ClassName=Sheet1 Member=Component J? CLP-104-02-F-D-BE-A-K
