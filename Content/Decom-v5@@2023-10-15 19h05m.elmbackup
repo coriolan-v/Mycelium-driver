@@ -2,9 +2,9 @@
   <model fps="60" isStagesAccessRestricted="False" masterOpacity="1" masterSpeed="1">
     <stages>
       <stage name="TopCurve1" id="18e11e9c-f4b9-4914-8dec-64368c6e955f" width="500" height="500" media="-1" merge="overwrite" hidden="False" locked="False">
-        <live intensity="0" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
+        <live intensity="0.308333333333333" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
           <color red="255" green="255" blue="255" />
-          <zone1 media="12" />
+          <zone1 media="6" />
           <zone2 media="0" />
         </live>
         <background path="c8ee87308230405a18cf72c47df2b87f.gif" scaleX="1.008" scaleY="1.008" opacity="0.4" />
@@ -348,10 +348,10 @@
         </schedule>
       </stage>
       <stage name="Trunk" id="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="0.52" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
-          <color red="98" green="255" blue="75" />
+        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
+          <color red="255" green="255" blue="255" />
           <zone1 media="30" />
-          <zone2 media="6" />
+          <zone2 media="38" />
         </live>
         <fixtures>
           <fixture group="19" group2="Dome" ledType="RBG" dmxProtocol="ArtNet" startUniverse="18" startAddress="9" breakUniverseAfter="0">
@@ -595,16 +595,16 @@
           <source relativePath="@animation&lt;node animation=&quot;plain&quot; direction=&quot;none&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
         </slot>
         <slot id="10" name="Circle scroll">
-          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;19&quot; size1=&quot;1.42&quot; size2=&quot;5.5&quot; size3=&quot;0&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;-10.58&quot; speed=&quot;1.16&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
+          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;16&quot; size1=&quot;5.5&quot; size2=&quot;5.5&quot; size3=&quot;0&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;0&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
         </slot>
         <slot id="11" name="Circle scroll">
-          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;38&quot; size1=&quot;2.97&quot; size2=&quot;1&quot; size3=&quot;0&quot; size4=&quot;-1&quot; size5=&quot;0&quot; size6=&quot;-112&quot; speed=&quot;-0.82&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
+          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;10&quot; size1=&quot;9.66326530612245&quot; size2=&quot;5.5&quot; size3=&quot;0&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;39.1836734693878&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
         </slot>
         <slot id="12" name="Circle scroll">
-          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;16&quot; size1=&quot;3.8&quot; size2=&quot;1&quot; size3=&quot;-4.39&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;0&quot; speed=&quot;-1.5&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;0&quot; blue=&quot;0&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
+          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;16&quot; size1=&quot;5.5&quot; size2=&quot;5.5&quot; size3=&quot;0&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;0&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
         </slot>
         <slot id="13" name="Circle scroll">
-          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;16&quot; size1=&quot;5.5&quot; size2=&quot;5.5&quot; size3=&quot;0&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;0&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;0&quot; green=&quot;0&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
+          <source relativePath="@glsl&lt;node name=&quot;circle scroll.frag&quot; nbItems2=&quot;16&quot; size1=&quot;5.5&quot; size2=&quot;5.5&quot; size3=&quot;0&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;0&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
         </slot>
         <slot id="14" name="Plasma white">
           <source relativePath="@glsl&lt;node name=&quot;plasma white.frag&quot; size3=&quot;0&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;0&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="7" />
