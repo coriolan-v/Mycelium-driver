@@ -1,7 +1,7 @@
 <console version="1" appVersion="1.0.0.673">
   <model fps="60" isStagesAccessRestricted="False" masterOpacity="1" masterSpeed="1">
     <stages>
-      <stage name="Top View" id="18e11e9c-f4b9-4914-8dec-64368c6e955f" width="500" height="500" media="-1" merge="overwrite" hidden="False" locked="False">
+      <stage name="TopCurve1" id="18e11e9c-f4b9-4914-8dec-64368c6e955f" width="500" height="500" media="-1" merge="overwrite" hidden="False" locked="False">
         <live intensity="0.526666666666667" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.24">
           <color red="255" green="255" blue="255" />
           <zone1 media="26" />
@@ -174,7 +174,7 @@
           <playlists />
         </schedule>
       </stage>
-      <stage name="Top View Color" id="e40c2c67-9dc5-4d37-b9d9-17360f9d14b3" width="500" height="500" media="-1" merge="multiply" hidden="False" locked="False">
+      <stage name="TopCurve2" id="e40c2c67-9dc5-4d37-b9d9-17360f9d14b3" width="500" height="500" media="-1" merge="multiply" hidden="False" locked="False">
         <live intensity="1" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
           <color red="255" green="255" blue="255" />
           <zone1 media="4" />
@@ -347,7 +347,7 @@
           <playlists />
         </schedule>
       </stage>
-      <stage name="Side View" id="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
+      <stage name="Trunk" id="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
         <live intensity="1" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.293333333333335">
           <color red="255" green="38" blue="0" />
           <zone1 media="26" />
