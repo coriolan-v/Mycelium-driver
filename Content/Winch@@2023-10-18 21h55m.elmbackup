@@ -1,7 +1,7 @@
 <console version="1" appVersion="1.0.0.673">
   <model fps="30" isStagesAccessRestricted="False" masterOpacity="1" masterSpeed="1">
     <stages>
-      <stage name="Winch" id="1f08d900-da67-43e5-b019-bc314369ebe7" width="500" height="500" media="-1" merge="overwrite" hidden="False" locked="False">
+      <stage name="Winch" id="e0622fc7-bfd4-487c-9e11-16920ddb6481" width="100" height="1000" media="-1" merge="overwrite" hidden="False" locked="False">
         <live intensity="1" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
           <color red="255" green="255" blue="255" />
           <zone1 media="3" />
@@ -9,10 +9,10 @@
         </live>
         <fixtures>
           <fixture group="RGB01" group2="" ledType="RGB" dmxProtocol="ArtNet" startUniverse="20" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="50" type="line" rotation="0">
+            <geometry nbLeds="100" type="line" rotation="0">
               <points>
-                <point x="24.3071948954302" y="27.3789832613362" />
-                <point x="27.5229357798171" y="488.532110091743" />
+                <point x="54.0106951871658" y="961.229946524065" />
+                <point x="48.663101604278" y="54.812834224599" />
               </points>
             </geometry>
           </fixture>
@@ -37,7 +37,7 @@
           <source relativePath="@animation&lt;node animation=&quot;hline&quot; size1=&quot;0.05&quot; size2=&quot;0.3&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; toggle1=&quot;False&quot; direction=&quot;both&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
         </slot>
         <slot id="3" name="Vertical swing">
-          <source relativePath="@animation&lt;node animation=&quot;vline&quot; size1=&quot;0.01&quot; size2=&quot;0&quot; speed=&quot;0.336666666666658&quot; timeOffset=&quot;0.01&quot; toggle1=&quot;False&quot; direction=&quot;both&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
+          <source relativePath="@animation&lt;node animation=&quot;vline&quot; size1=&quot;0.01&quot; size2=&quot;0&quot; speed=&quot;0.213333333333332&quot; timeOffset=&quot;0&quot; toggle1=&quot;False&quot; direction=&quot;both&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
         </slot>
         <slot id="4" name="Static">
           <source relativePath="@animation&lt;node animation=&quot;plain&quot; direction=&quot;none&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
@@ -97,7 +97,7 @@
   <view displayArtnetHexadecimal="False">
     <previews />
     <stages>
-      <stage ID="1f08d900-da67-43e5-b019-bc314369ebe7">
+      <stage ID="e0622fc7-bfd4-487c-9e11-16920ddb6481">
         <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
       </stage>
     </stages>

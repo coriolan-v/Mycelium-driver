@@ -9,10 +9,10 @@
         </live>
         <fixtures>
           <fixture group="RGB01" group2="" ledType="RGB" dmxProtocol="ArtNet" startUniverse="20" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="50" type="line" rotation="0">
+            <geometry nbLeds="255" type="line" rotation="0">
               <points>
+                <point x="26.9783152136093" y="480.133877192701" />
                 <point x="24.3071948954302" y="27.3789832613362" />
-                <point x="27.5229357798171" y="488.532110091743" />
               </points>
             </geometry>
           </fixture>
@@ -37,7 +37,7 @@
           <source relativePath="@animation&lt;node animation=&quot;hline&quot; size1=&quot;0.05&quot; size2=&quot;0.3&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; toggle1=&quot;False&quot; direction=&quot;both&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
         </slot>
         <slot id="3" name="Vertical swing">
-          <source relativePath="@animation&lt;node animation=&quot;vline&quot; size1=&quot;0.01&quot; size2=&quot;0&quot; speed=&quot;0.336666666666658&quot; timeOffset=&quot;0.01&quot; toggle1=&quot;False&quot; direction=&quot;both&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
+          <source relativePath="@animation&lt;node animation=&quot;vline&quot; size1=&quot;0.07&quot; size2=&quot;0.07&quot; speed=&quot;0.23&quot; timeOffset=&quot;0.01&quot; toggle1=&quot;False&quot; direction=&quot;both&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
         </slot>
         <slot id="4" name="Static">
           <source relativePath="@animation&lt;node animation=&quot;plain&quot; direction=&quot;none&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;remote /&gt;&lt;/node&gt;" type="4" />
