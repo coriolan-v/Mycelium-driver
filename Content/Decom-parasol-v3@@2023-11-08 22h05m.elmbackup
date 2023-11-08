@@ -124,8 +124,8 @@
         </schedule>
       </stage>
       <stage name="Side View All" id="84d00856-2184-4f48-9ad2-c4d91bc7284d" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="0.441666666666667" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1.12000000000002">
-          <color red="255" green="255" blue="255" />
+        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1.12000000000002">
+          <color red="255" green="239" blue="65" />
           <zone1 media="15" />
           <zone2 media="2" />
         </live>
@@ -296,59 +296,59 @@
           <playlists />
         </schedule>
       </stage>
-      <stage name="Side View Tentacles Only" id="879d1197-5676-40e8-adfe-7f66dd538086" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1.12000000000002">
-          <color red="253" green="255" blue="111" />
-          <zone1 media="24" />
-          <zone2 media="29" />
+      <stage name="Side View Tentacles Only" id="453e8813-8b51-4960-8237-50d0e1153239" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
+        <live intensity="0.64" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1.12000000000002">
+          <color red="255" green="239" blue="65" />
+          <zone1 media="23" />
+          <zone2 media="2" />
         </live>
-        <background path="Jellyfish content/jelly-side.jpg" offsetX="27" offsetY="-316.999999999999" opacity="0.4" />
+        <background path="Jellyfish content/jelly-side.jpg" offsetX="27" offsetY="-317" opacity="0.4" />
         <fixtures>
           <fixture group="1" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="0" startAddress="261" breakUniverseAfter="0">
             <geometry nbLeds="13" type="line" rotation="-90">
               <points>
-                <point x="102.726582911336" y="319.86076755796" />
-                <point x="99.9995736547213" y="599.000202999423" />
+                <point x="137.700534759358" y="618.983957219251" />
+                <point x="134.962573658339" y="975.989291498276" />
               </points>
             </geometry>
           </fixture>
           <fixture group="2" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="1" startAddress="261" breakUniverseAfter="0">
             <geometry nbLeds="13" type="line" rotation="-90">
               <points>
-                <point x="154.65706419476" y="319.999529684282" />
-                <point x="149.799573654721" y="598.999208061507" />
+                <point x="189.839572192514" y="613.636363636364" />
+                <point x="184.962573658339" y="975.989291498276" />
               </points>
             </geometry>
           </fixture>
           <fixture group="3" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="2" startAddress="261" breakUniverseAfter="0">
             <geometry nbLeds="13" type="line" rotation="-90">
               <points>
-                <point x="201.261342269626" y="319.999601192889" />
-                <point x="199.599573654721" y="598.999213419238" />
+                <point x="236.631016042781" y="609.625668449198" />
+                <point x="234.962573658339" y="975.989291498276" />
               </points>
             </geometry>
           </fixture>
           <fixture group="4" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="3" startAddress="261" breakUniverseAfter="0">
             <geometry nbLeds="13" type="line" rotation="-90">
               <points>
-                <point x="246.534069542352" y="319.999744900745" />
-                <point x="249.399573654721" y="599.000182178838" />
+                <point x="282.085561497326" y="601.604278074866" />
+                <point x="284.962573658339" y="975.989291498276" />
               </points>
             </geometry>
           </fixture>
           <fixture group="5" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="4" startAddress="261" breakUniverseAfter="0">
             <geometry nbLeds="13" type="line" rotation="-90">
               <points>
-                <point x="295.801449221497" y="319.999886648402" />
-                <point x="299.199573654721" y="599.000181255629" />
+                <point x="331.550802139038" y="593.582887700535" />
+                <point x="334.962573658339" y="975.989291498276" />
               </points>
             </geometry>
           </fixture>
           <fixture group="6" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="5" startAddress="261" breakUniverseAfter="0">
             <geometry nbLeds="13" type="line" rotation="-90">
               <points>
-                <point x="345.068828900642" y="319.999672365379" />
-                <point x="348.999573654721" y="598.999219873544" />
+                <point x="381.016042780749" y="605.614973262032" />
+                <point x="384.962573658339" y="975.989291498276" />
               </points>
             </geometry>
           </fixture>
@@ -475,7 +475,7 @@
         <group name="Sequences" id="758f5ae2-cc5a-492e-8f63-dce06d436979">
           <stages>
             <stage ID="18e11e9c-f4b9-4914-8dec-64368c6e955f" />
-            <stage ID="879d1197-5676-40e8-adfe-7f66dd538086" />
+            <stage ID="453e8813-8b51-4960-8237-50d0e1153239" />
           </stages>
           <sequences>
             <sequence id="0" name="">
@@ -491,7 +491,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="24" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="37" opacity="0.4" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="37" opacity="0.4" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="239" blue="65" />
                     </stage>
                   </stages>
@@ -519,7 +519,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="21" opacity="1" speed="0.973333333333336" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="239" blue="65" />
                     </stage>
                   </stages>
@@ -546,7 +546,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="21" opacity="0" speed="0.973333333333336" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="14" opacity="1" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="14" opacity="1" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
                   </stages>
@@ -573,7 +573,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="21" opacity="0" speed="0.973333333333336" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="20" opacity="0.695" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="20" opacity="0.695" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
                   </stages>
@@ -600,7 +600,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="21" opacity="0" speed="0.973333333333336" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="19" opacity="1" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="19" opacity="1" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
                   </stages>
@@ -627,7 +627,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="23" opacity="1" speed="0.973333333333336" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="0" green="0" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="12" opacity="0" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="12" opacity="0" speed="1.00000000000002" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="236" green="232" blue="255" />
                     </stage>
                   </stages>
@@ -655,7 +655,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="23" opacity="0" speed="0.666666666666668" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="0" green="0" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="239" blue="65" />
                     </stage>
                   </stages>
@@ -682,7 +682,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="22" opacity="0.76" speed="0.666666666666668" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="239" blue="65" />
                     </stage>
                   </stages>
@@ -710,7 +710,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="22" opacity="0" speed="0.666666666666668" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="239" blue="65" />
                     </stage>
                   </stages>
@@ -737,7 +737,7 @@
                     <stage stageID="99b7e1c8-75fa-434b-8481-a9f1332b5fa8" mediaID="22" opacity="0" speed="0.666666666666668" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
                     </stage>
-                    <stage stageID="879d1197-5676-40e8-adfe-7f66dd538086" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
+                    <stage stageID="453e8813-8b51-4960-8237-50d0e1153239" mediaID="37" opacity="0" speed="0.293333333333335" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="239" blue="65" />
                     </stage>
                   </stages>
@@ -1220,7 +1220,7 @@
       <stage ID="84d00856-2184-4f48-9ad2-c4d91bc7284d">
         <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
       </stage>
-      <stage ID="879d1197-5676-40e8-adfe-7f66dd538086">
+      <stage ID="453e8813-8b51-4960-8237-50d0e1153239">
         <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
       </stage>
     </stages>
