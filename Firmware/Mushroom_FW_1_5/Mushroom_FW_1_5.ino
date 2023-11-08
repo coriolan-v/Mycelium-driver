@@ -47,14 +47,14 @@ void setup() {
   digitalWrite(13, HIGH);
 
   leds.begin();
-  //initLED(0, 0, 25);
+  initLED(0, 25, 0);
 
   artnet.begin(mac, ip);
   artnet.setArtDmxCallback(onDmxFrame);
 
-  //initLED(0, 25, 0);
+  initLED(0, 0, 25);
 
-  setupDMX();
+  //setupDMX();
 
   Serial.println("READY");
 }
@@ -67,7 +67,7 @@ void loop() {
   // we call the read function inside the loop
   artnet.read();
 
-  setWinchPosition(winchPosition);
+  //setWinchPosition(winchPosition);
 }
 
 
@@ -126,12 +126,21 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   }
 
 
-  for (int i = 0; i < maxUniverses; i++) {
+ for (int i = 0; i < maxUniverses; i++) {
     if (universesReceived[i] == 0) {
       sendFrame = 0;
       break;
     }
   }
+
+  if(universe == 21) {
+    sendFrame = 1;
+   leds.show();
+    // Reset universeReceived to 0
+    memset(universesReceived, 0, maxUniverses);
+  } 
+
+ 
 
   led = universe * 100;
   for (int i = 0; i < 100; i++) {
