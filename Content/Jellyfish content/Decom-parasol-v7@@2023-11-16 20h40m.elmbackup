@@ -2,7 +2,7 @@
   <model fps="60" isStagesAccessRestricted="False" masterOpacity="1" masterSpeed="1">
     <stages>
       <stage name="Top View" id="18e11e9c-f4b9-4914-8dec-64368c6e955f" width="500" height="500" media="-1" merge="overwrite" hidden="False" locked="False">
-        <live intensity="0" crossfadeMs="2000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
+        <live intensity="1" crossfadeMs="2000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
           <color red="255" green="255" blue="255" />
           <zone1 media="-1" />
           <zone2 media="16" />
@@ -192,8 +192,8 @@
         </live>
         <background path="Jellyfish content/jelly-side.jpg" offsetX="27" offsetY="-140" opacity="0.4" />
         <fixtures>
-          <fixture group="1" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="0" startAddress="72" breakUniverseAfter="0">
-            <geometry nbLeds="79" type="line" rotation="-90">
+          <fixture group="1" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="0" startAddress="69" breakUniverseAfter="0">
+            <geometry nbLeds="80" type="line" rotation="-90">
               <points>
                 <point x="134.962573658339" y="975.989318266271" />
                 <point x="134.962573658339" y="24.0000273493803" />
