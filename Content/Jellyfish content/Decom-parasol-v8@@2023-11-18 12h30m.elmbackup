@@ -70,7 +70,7 @@
         </live>
         <background path="Jellyfish content/jelly-top.jpg" offsetX="17" offsetY="10" scaleX="2" scaleY="2" opacity="0.4" />
         <fixtures>
-          <fixture group="3" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="2" startAddress="243" breakUniverseAfter="0">
+          <fixture group="3" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="2" startAddress="252" breakUniverseAfter="0">
             <geometry nbLeds="19" type="line" rotation="-119.250748921078">
               <points>
                 <point x="250.668449197861" y="248.663101604278" />
@@ -78,7 +78,7 @@
               </points>
             </geometry>
           </fixture>
-          <fixture group="1" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="0" startAddress="243" breakUniverseAfter="0">
+          <fixture group="1" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="0" startAddress="246" breakUniverseAfter="0">
             <geometry nbLeds="19" type="line" rotation="-119.250748921078">
               <points>
                 <point x="250.668449197861" y="248.663101604278" />
@@ -94,7 +94,7 @@
               </points>
             </geometry>
           </fixture>
-          <fixture group="4" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="3" startAddress="243" breakUniverseAfter="0">
+          <fixture group="4" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="3" startAddress="255" breakUniverseAfter="0">
             <geometry nbLeds="19" type="line" rotation="-119.250748921078">
               <points>
                 <point x="250.668449073212" y="248.663101196504" />
@@ -102,7 +102,7 @@
               </points>
             </geometry>
           </fixture>
-          <fixture group="5" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="4" startAddress="243" breakUniverseAfter="0">
+          <fixture group="5" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="4" startAddress="252" breakUniverseAfter="0">
             <geometry nbLeds="19" type="line" rotation="-119.250748921078">
               <points>
                 <point x="250.668449197861" y="248.663101604278" />
@@ -110,8 +110,8 @@
               </points>
             </geometry>
           </fixture>
-          <fixture group="6" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="5" startAddress="243" breakUniverseAfter="0">
-            <geometry nbLeds="19" type="line" rotation="-119.250748921078">
+          <fixture group="6" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="5" startAddress="240" breakUniverseAfter="0">
+            <geometry nbLeds="20" type="line" rotation="-119.250748921078">
               <points>
                 <point x="250.668442883254" y="248.663101589026" />
                 <point x="135.026737967915" y="448.529411764706" />
@@ -185,7 +185,7 @@
         </schedule>
       </stage>
       <stage name="Side View All" id="84d00856-2184-4f48-9ad2-c4d91bc7284d" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="1" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.960000000000002">
+        <live intensity="0" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.960000000000002">
           <color red="255" green="255" blue="255" />
           <zone1 media="-1" />
           <zone2 media="112" />
@@ -358,7 +358,7 @@
         </schedule>
       </stage>
       <stage name="Side Body&amp;Trunk" id="9b0029e3-fff0-4076-aa64-cbf92c5169ff" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="1" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666668">
+        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666668">
           <color red="255" green="255" blue="255" />
           <zone1 media="112" />
           <zone2 media="98" />
@@ -946,7 +946,7 @@
         </schedule>
       </stage>
       <stage name="Side View Tentacles Only" id="879d1197-5676-40e8-adfe-7f66dd538086" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="1" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.973333333333336">
+        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.973333333333336">
           <color red="255" green="164" blue="54" />
           <zone1 media="112" />
           <zone2 media="1" />

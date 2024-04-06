@@ -2,10 +2,10 @@
   <model fps="60" isStagesAccessRestricted="False" masterOpacity="1" masterSpeed="1">
     <stages>
       <stage name="Top View" id="18e11e9c-f4b9-4914-8dec-64368c6e955f" width="500" height="500" media="-1" merge="overwrite" hidden="False" locked="False">
-        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
+        <live intensity="0.7" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
           <color red="255" green="255" blue="255" />
-          <zone1 media="16" />
-          <zone2 media="18" />
+          <zone1 media="18" />
+          <zone2 media="106" />
         </live>
         <background path="Jellyfish content/jelly-top.jpg" offsetX="17" offsetY="10" scaleX="2" scaleY="2" opacity="0.4" />
         <fixtures>
@@ -63,10 +63,10 @@
         </schedule>
       </stage>
       <stage name="Top View Tentacles Only" id="7c7bf138-c005-499e-a40b-5bf6159524c5" width="500" height="500" media="-1" merge="overwrite" hidden="False" locked="False">
-        <live intensity="0" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
-          <color red="255" green="255" blue="255" />
-          <zone1 media="-1" />
-          <zone2 media="18" />
+        <live intensity="0.638888888888889" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
+          <color red="255" green="3" blue="3" />
+          <zone1 media="18" />
+          <zone2 media="-1" />
         </live>
         <background path="Jellyfish content/jelly-top.jpg" offsetX="17" offsetY="10" scaleX="2" scaleY="2" opacity="0.4" />
         <fixtures>
@@ -124,10 +124,10 @@
         </schedule>
       </stage>
       <stage name="Color All" id="181a381e-ba93-4458-9dae-b3255faa1e30" width="500" height="500" media="-1" merge="multiply" hidden="False" locked="False">
-        <live intensity="0" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
+        <live intensity="1" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
           <color red="255" green="255" blue="255" />
-          <zone1 media="-1" />
-          <zone2 media="2" />
+          <zone1 media="2" />
+          <zone2 media="-1" />
         </live>
         <background path="hexagram.png" scaleX="1.008" scaleY="1.008" opacity="0.4" />
         <fixtures>
@@ -185,15 +185,15 @@
         </schedule>
       </stage>
       <stage name="Side View All" id="84d00856-2184-4f48-9ad2-c4d91bc7284d" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="1" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.960000000000002">
+        <live intensity="0" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.960000000000002">
           <color red="255" green="255" blue="255" />
           <zone1 media="-1" />
           <zone2 media="112" />
         </live>
         <background path="Jellyfish content/jelly-side.jpg" offsetX="27" offsetY="-140" opacity="0.4" />
         <fixtures>
-          <fixture group="1" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="0" startAddress="72" breakUniverseAfter="0">
-            <geometry nbLeds="79" type="line" rotation="-90">
+          <fixture group="1" group2="Side" ledType="RBG" dmxProtocol="ArtNet" startUniverse="0" startAddress="69" breakUniverseAfter="0">
+            <geometry nbLeds="80" type="line" rotation="-90">
               <points>
                 <point x="134.962573658339" y="975.989318266271" />
                 <point x="134.962573658339" y="24.0000273493803" />
@@ -358,10 +358,10 @@
         </schedule>
       </stage>
       <stage name="Side Body&amp;Trunk" id="9b0029e3-fff0-4076-aa64-cbf92c5169ff" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="1" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666668">
+        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666668">
           <color red="255" green="255" blue="255" />
-          <zone1 media="112" />
-          <zone2 media="98" />
+          <zone1 media="18" />
+          <zone2 media="112" />
         </live>
         <background path="Jellyfish content/jelly-side.jpg" offsetX="27" offsetY="-140" opacity="0.4" />
         <fixtures>
@@ -877,7 +877,7 @@
         </schedule>
       </stage>
       <stage name="Color Tentacles Only" id="d266995f-c727-4434-89ca-955ef4d6ad79" width="500" height="1000" media="-1" merge="multiply" hidden="False" locked="False">
-        <live intensity="0" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
+        <live intensity="0" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.986666666666667">
           <color red="255" green="255" blue="255" />
           <zone1 media="-1" />
           <zone2 media="-1" />
@@ -946,10 +946,10 @@
         </schedule>
       </stage>
       <stage name="Side View Tentacles Only" id="879d1197-5676-40e8-adfe-7f66dd538086" width="500" height="1000" media="-1" merge="screen" hidden="False" locked="False">
-        <live intensity="1" crossfadeMs="1000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.973333333333336">
+        <live intensity="0" crossfadeMs="1000" fadePosition="1" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="0.973333333333336">
           <color red="255" green="164" blue="54" />
           <zone1 media="112" />
-          <zone2 media="1" />
+          <zone2 media="22" />
         </live>
         <background path="Jellyfish content/jelly-side.jpg" offsetX="27" offsetY="-316.999999999999" opacity="0.4" />
         <fixtures>
@@ -1135,7 +1135,7 @@
           <sequences>
             <sequence id="0" name="Soothing ">
               <steps>
-                <step name="Soothing 1" durationMs="600000" transitionTimeMsOverride="2000">
+                <step name="Soothing 1" durationMs="300000" transitionTimeMsOverride="2000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="16" opacity="1" speed="0.986666666666667" transitionTimeMs="2000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1167,7 +1167,7 @@
                     <media mediaID="1" configurationXml="&lt;node size1=&quot;1&quot; speed=&quot;1.07792207792208&quot; direction=&quot;up&quot;&gt;&lt;colors&gt;&lt;color red=&quot;0&quot; green=&quot;181&quot; blue=&quot;255&quot; /&gt;&lt;color red=&quot;0&quot; green=&quot;255&quot; blue=&quot;55&quot; /&gt;&lt;/colors&gt;&lt;/node&gt;" />
                   </medias>
                 </step>
-                <step name="Soothing 2" durationMs="600000" transitionTimeMsOverride="1000">
+                <step name="Soothing 2" durationMs="300000" transitionTimeMsOverride="1000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="27" opacity="1" speed="0.986666666666667" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1199,7 +1199,7 @@
                     <media mediaID="1" configurationXml="&lt;node size1=&quot;1&quot; speed=&quot;1.07792207792208&quot; direction=&quot;up&quot;&gt;&lt;colors&gt;&lt;color red=&quot;0&quot; green=&quot;181&quot; blue=&quot;255&quot; /&gt;&lt;color red=&quot;0&quot; green=&quot;255&quot; blue=&quot;55&quot; /&gt;&lt;/colors&gt;&lt;/node&gt;" />
                   </medias>
                 </step>
-                <step name="Soothing 3" durationMs="600000" transitionTimeMsOverride="2000">
+                <step name="Soothing 3" durationMs="300000" transitionTimeMsOverride="2000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="16" opacity="0" speed="0.986666666666667" transitionTimeMs="2000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1231,7 +1231,7 @@
                     <media mediaID="14" configurationXml="&lt;node size3=&quot;0.911176470588237&quot; size4=&quot;-1&quot; size5=&quot;0&quot; size6=&quot;-180&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;0&quot; green=&quot;255&quot; blue=&quot;204&quot; /&gt;&lt;/colors&gt;&lt;/node&gt;" />
                   </medias>
                 </step>
-                <step name="Soothing 4" durationMs="600000" transitionTimeMsOverride="2000">
+                <step name="Soothing 4" durationMs="300000" transitionTimeMsOverride="2000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="16" opacity="0" speed="0.986666666666667" transitionTimeMs="1000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1264,12 +1264,12 @@
                 </step>
               </steps>
               <triggers>
-                <schedule isEnabled="False" startTime="68400000" startTimeRelativeMode="Midnight" startMonth="1" startDayOfMonth="1" endMonth="12" endDayOfMonth="31" activeDays="1111111" isLooping="True" />
+                <schedule isEnabled="True" startTime="68400000" startTimeRelativeMode="Midnight" startMonth="1" startDayOfMonth="1" endMonth="12" endDayOfMonth="31" activeDays="1111111" isLooping="True" />
               </triggers>
             </sequence>
             <sequence id="1" name="Transition">
               <steps>
-                <step name="Transition" durationMs="300000">
+                <step name="Transition" durationMs="600000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="106" opacity="1" speed="0.986666666666667" transitionTimeMs="2000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1300,7 +1300,7 @@
                     <media mediaID="106" configurationXml="&lt;node nbItems=&quot;1&quot; size1=&quot;3.05102040816326&quot; size3=&quot;-1.22448979591837&quot; size4=&quot;0&quot; size5=&quot;0&quot; size6=&quot;0&quot; size7=&quot;54.7919539483606&quot; speed=&quot;-0.551020408163265&quot; timeOffset=&quot;0&quot; tileX=&quot;none&quot; tileY=&quot;none&quot; color=&quot;normal&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;/node&gt;" />
                   </medias>
                 </step>
-                <step name="Transition 2" durationMs="300000">
+                <step name="Transition 2" durationMs="10000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="18" opacity="0.7" speed="0.986666666666667" transitionTimeMs="2000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1435,7 +1435,7 @@
                     <media mediaID="61" configurationXml="&lt;node size1=&quot;0.05&quot; size2=&quot;0.3&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; toggle1=&quot;True&quot; direction=&quot;both&quot;&gt;&lt;colors&gt;&lt;color red=&quot;92&quot; green=&quot;28&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;/node&gt;" />
                   </medias>
                 </step>
-                <step name="Hectic 4" durationMs="180000" transitionTimeMsOverride="2000">
+                <step name="Hectic 4" durationMs="300000" transitionTimeMsOverride="2000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="17" opacity="0" speed="0.986666666666667" transitionTimeMs="2000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1564,7 +1564,7 @@
                     <media mediaID="60" configurationXml="&lt;node size1=&quot;0.05&quot; size2=&quot;0.3&quot; speed=&quot;1&quot; timeOffset=&quot;0&quot; toggle1=&quot;False&quot; direction=&quot;up&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;255&quot; blue=&quot;255&quot; /&gt;&lt;/colors&gt;&lt;/node&gt;" />
                   </medias>
                 </step>
-                <step name="Hectic 8" durationMs="300000" transitionTimeMsOverride="2000">
+                <step name="" durationMs="10000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="34" opacity="0.677511845275949" speed="0.986666666666667" transitionTimeMs="2000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1596,7 +1596,7 @@
                     <media mediaID="4" configurationXml="&lt;node size1=&quot;1&quot; speed=&quot;1&quot; direction=&quot;random&quot;&gt;&lt;colors&gt;&lt;color red=&quot;255&quot; green=&quot;0&quot; blue=&quot;0&quot; /&gt;&lt;color red=&quot;255&quot; green=&quot;146&quot; blue=&quot;0&quot; /&gt;&lt;/colors&gt;&lt;/node&gt;" />
                   </medias>
                 </step>
-                <step name="Hectic 9" durationMs="300000" transitionTimeMsOverride="2000">
+                <step name="" durationMs="10000">
                   <stages>
                     <stage stageID="18e11e9c-f4b9-4914-8dec-64368c6e955f" mediaID="34" opacity="0" speed="0.986666666666667" transitionTimeMs="2000" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" isRobotControlled="False">
                       <colorFilter red="255" green="255" blue="255" />
@@ -1634,7 +1634,7 @@
               </triggers>
             </sequence>
           </sequences>
-          <performer nbColumns="4" sequencePlayMode="loop" autoGo="True" tapTempoDivider="1" overrideValueTransitionTimeMs="1395">
+          <performer nbColumns="4" sequencePlayMode="loop" autoGo="True" tapTempoDivider="1" overrideValueTransitionTimeMs="2098">
             <colors>
               <preset red="255" green="255" blue="255" />
               <preset red="127" green="255" blue="0" />
