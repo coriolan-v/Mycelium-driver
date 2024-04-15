@@ -1,4 +1,4 @@
-#define COPILOT
+#define PILOT
 
 #include <DFRobot_PN532.h>
 #include <Ethernet.h>
@@ -35,6 +35,13 @@ DFRobot_PN532_IIC nfc(PN532_IRQ, POLLING);
 DFRobot_PN532::sCard_t NFCcard;
 
 unsigned long stampMillis;
+String udpmessage = "";
+// #ifdef PILOT
+// udpmessage = String("PILOT");
+// #endif
+// #ifdef COPILOT
+// udpmessage = String("COPILOT");
+// #endif
 
 void setup() {
 
@@ -51,11 +58,26 @@ void setup() {
   //Initialize the NFC module
   while (!nfc.begin()) {
     Serial.println("NFC init failure");
+    Udp.beginPacket(outIp, outPort);
+    #ifdef PILOT
+    Udp.write("PILOT NFC init failure");    // send the bytes to the SLIP stream
+    #endif
+    #ifdef COPILOT
+    Udp.write("COPILOT NFC init failure");    // send the bytes to the SLIP stream
+    #endif
+    Udp.endPacket();  // mark the end of the OSC Packet
     delay(1000);
   }
 
-
-  Serial.println("Successfully init NFC moduele");
+  Udp.beginPacket(outIp, outPort);
+  Serial.println("Successfully init NFC module");
+  #ifdef PILOT
+  Udp.write("PILOT Successfully NFC init ");    // send the bytes to the SLIP stream
+  #endif
+  #ifdef COPILOT
+  Udp.write("COPILOT Successfully NFC init ");    // send the bytes to the SLIP stream
+  #endif
+  Udp.endPacket();  // mark the end of the OSC Packet
 }
 
 bool cardPresent = false;
@@ -105,20 +127,46 @@ void loop() {
 void sendOSC() {
   //OSCMessage msg();
 
+Udp.beginPacket(outIp, outPort);
 #ifdef PILOT
-  OSCMessage msg("PILOT");
-  // msg.add("PILOT");
+  //OSCMessage msg("PILOT");
+  Udp.write("PILOT");    // send the bytes to the SLIP stream
 #endif
 
 #ifdef COPILOT
-  OSCMessage msg("COPILOT");
+  //OSCMessage msg("COPILOT");
+  Udp.write("COPILOT");    // send the bytes to the SLIP stream
 #endif
 
-  Udp.beginPacket(outIp, outPort);
-  msg.send(Udp);    // send the bytes to the SLIP stream
+  
+  //msg.send(Udp);    // send the bytes to the SLIP stream
   Udp.endPacket();  // mark the end of the OSC Packet
-  msg.empty();      // free space occupied by message
+  //msg.empty();      // free space occupied by message
 
   Serial.println("Sent OSC message");
   //Serial.println(Udp);
 }
+
+// void sendUDPmessage(String udpmessage)
+// {
+//   char charBuf[50];
+//  udpmessage.toCharArray(charBuf, 50)
+
+
+// Udp.beginPacket(outIp, outPort);
+
+// #ifdef PILOT
+//   //OSCMessage msg("PILOT");
+//   Udp.write("PILOT");    // send the bytes to the SLIP stream
+// #endif
+
+// #ifdef COPILOT
+//   //OSCMessage msg("COPILOT");
+//   Udp.write("COPILOT");    // send the bytes to the SLIP stream
+// #endif
+
+//   Udp.endPacket();  // mark the end of the OSC Packet
+//   //msg.empty();      // free space occupied by message
+
+//   Serial.print("Sent OSC message :"); Serial.println(udpmessage);
+// }
