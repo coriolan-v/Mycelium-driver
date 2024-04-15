@@ -1,22 +1,29 @@
-/*!
- *@file nfcCardInfo.ino
- *@brief read the basic information of the card
- *@details  This demo runs on the arduino platform.
- *@        Download this demo to read the basic information of the card,
- *@        including UID, manufacturer, storage space, RF technology etc.
- *@        
- *@        Suported NFC card/tag:
- *@        1.MIFARE Classic S50/S70
- *@        2.NTAG213/215/216
- *@        3.MIFARE Ultralight
- *@copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- *@license     The MIT license (MIT)
- *@author [fengli](li.feng@dfrobot.com)
- *@version  V1.0
- *@date  2019-7-3
- *@url https://github.com/DFRobot/DFRobot_PN532
- */
+#define COPILOT
+
 #include <DFRobot_PN532.h>
+#include <Ethernet.h>
+#include <EthernetUdp.h>
+#include <SPI.h>
+#include <OSCMessage.h>
+
+EthernetUDP Udp;
+
+IPAddress outIp(10, 0, 0, 1);
+const unsigned int outPort = 9999;
+
+#ifdef PILOT
+IPAddress ip(10, 0, 0, 11);
+byte mac[] = {
+  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
+};  // you can find this written on the board of some Arduino Ethernets or shields
+#endif
+
+#ifdef COPILOT
+IPAddress ip(10, 0, 0, 12);
+byte mac[] = {
+  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEF
+};  // you can find this written on the board of some Arduino Ethernets or shields
+#endif
 
 #define BLOCK_SIZE 16
 #define PN532_IRQ (2)
@@ -27,37 +34,45 @@
 DFRobot_PN532_IIC nfc(PN532_IRQ, POLLING);
 DFRobot_PN532::sCard_t NFCcard;
 
+unsigned long stampMillis;
+
 void setup() {
 
+
+  delay(2000);
   Serial.begin(115200);
+
+  Ethernet.begin(mac, ip);
+  Udp.begin(8888);
+
+  Serial.print("My ip: ");
+  Serial.println(ip);
+
   //Initialize the NFC module
   while (!nfc.begin()) {
-    Serial.println("initial failure");
+    Serial.println("NFC init failure");
     delay(1000);
   }
-  Serial.println("Please place the NFC card/tag on module..... ");
+
+
+  Serial.println("Successfully init NFC moduele");
 }
 
 bool cardPresent = false;
 
 String old_cardUID = "1";
-String new_cardUID = "";
+String new_cardUID = "0";
 
 void loop() {
-  //Scan, write and read NFC card every 2s
-  //Print all what is to be written and read
 
-  if (nfc.scan() == true) {
+  if (nfc.scan()) {
 
-    //cardPresent = true;
-
-    //if(cardPresent == true){
     if (new_cardUID != old_cardUID) {
-      cardPresent = false;
+      //cardPresent = false;
       NFCcard = nfc.getInformation();
-      Serial.println("----------------NFC card/tag information-------------------");
-      Serial.print("UID Lenght: ");
-      Serial.println(NFCcard.uidlenght);
+      // Serial.println("----------------NFC card/tag information-------------------");
+      // Serial.print("UID Lenght: ");
+      // Serial.println(NFCcard.uidlenght);
       Serial.print("UID: ");
       new_cardUID = "";
       for (int i = 0; i < NFCcard.uidlenght; i++) {
@@ -65,44 +80,45 @@ void loop() {
         Serial.print(" ");
         new_cardUID += NFCcard.uid[i];
       }
-      Serial.println("");
-      Serial.print("AQTA: ");
-      Serial.print("0x");
-      Serial.print("0");
-      Serial.print(NFCcard.AQTA[0], HEX);
-      Serial.print("");
-      Serial.println(NFCcard.AQTA[1], HEX);
-      Serial.print("SAK: ");
-      Serial.print("0x");
-      Serial.println(NFCcard.SAK, HEX);
-      Serial.print("Type: ");
-      Serial.println(NFCcard.cardType);
-      Serial.print("Manufacturer:");
-      Serial.println(NFCcard.Manufacturer);
-      Serial.print("RF Technology:");
-      Serial.println(NFCcard.RFTechnology);
-      Serial.print("Memory Size:");
-      Serial.print(NFCcard.size);
-      Serial.print(" bytes(total)/");
-      Serial.print(NFCcard.usersize);
-      Serial.println(" bytes(available)");
-      Serial.print("Block/Page Size:");
-      Serial.print(NFCcard.blockSize);
-      Serial.println(" bytes");
-      //Serial.print("Sector Size:"); Serial.print(NFCcard.sectorSize); Serial.println(" bytes");
-      Serial.print("Number of Blocks/pages:");
-      Serial.println(NFCcard.blockNumber);
+    
+      //Serial.print("my uid: "); Serial.println(cardUID);
+      sendOSC();
 
-       //Serial.print("my uid: "); Serial.println(cardUID);
+      old_cardUID = new_cardUID;
 
-    old_cardUID = new_cardUID;
-    }
-    //Read the basic information of the card
+       stampMillis = millis();
+    } 
+  } 
 
+  if (millis() - stampMillis > 2000 && old_cardUID == new_cardUID) {
+    stampMillis = millis();
 
-  } else {
-    //Serial.println("no card!");
-   // cardPresent = false;
+    old_cardUID = 1;
+
+    Serial.println("reset");
+    //Serial.print("old_cardUID: "); Serial.println(old_cardUID);
+    //Serial.print("new_cardUID: "); Serial.println(new_cardUID);
   }
-  //delay(2000);
+
+}
+
+void sendOSC() {
+  //OSCMessage msg();
+
+#ifdef PILOT
+  OSCMessage msg("PILOT");
+  // msg.add("PILOT");
+#endif
+
+#ifdef COPILOT
+  OSCMessage msg("COPILOT");
+#endif
+
+  Udp.beginPacket(outIp, outPort);
+  msg.send(Udp);    // send the bytes to the SLIP stream
+  Udp.endPacket();  // mark the end of the OSC Packet
+  msg.empty();      // free space occupied by message
+
+  Serial.println("Sent OSC message");
+  //Serial.println(Udp);
 }
