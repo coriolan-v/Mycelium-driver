@@ -22,9 +22,9 @@ const byte numStrips = numPins;      // change for your setup
 const int numLeds = ledsPerStrip * numStrips;
 const int numberOfChannels = numLeds * 3;  // Total number of channels you want to receive (1 led = 3 channels)
 const int bytesPerLED = 3;  // change to 4 if using RGBW
-DMAMEM int displayMemory[600];
+DMAMEM int displayMemory[ledsPerStrip * 6];
 //DMAMEM int displayMemory[ledsPerStrip * numPins * bytesPerLED / 4];
-int drawingMemory[ledsPerStrip * numPins * bytesPerLED / 4];
+int drawingMemory[ledsPerStrip * 6];
 const int config = WS2811_GRB | WS2811_800kHz;
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config, numPins, pinList);
 // Artnet settings
@@ -38,7 +38,7 @@ bool sendFrame = 1;
 int previousDataLength = 0;
 
 // Change ip and mac address for your setup
-byte ip[] = { 10, 0, 0, 10 };
+byte ip[] = { 10, 0, 0, 9 };
 byte mac[] = { 0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEC };
 
 void setup() {
@@ -48,13 +48,13 @@ void setup() {
   digitalWrite(13, HIGH);
   
   leds.begin();
-  initLED(0,0,25);
+  //initLED(0,0,25);
   
   artnet.begin(mac, ip);
   // this will be called for each packet received
   artnet.setArtDmxCallback(onDmxFrame);
 
-  initLED(0,25,0);
+  //initLED(0,25,0);
 
   Serial.println("READY");
 }
