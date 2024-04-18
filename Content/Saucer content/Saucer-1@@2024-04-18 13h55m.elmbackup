@@ -710,82 +710,6 @@
           <playlists />
         </schedule>
       </stage>
-      <stage name="Beacons" id="b922de77-a351-4458-a7e3-aba6cf9e5fa3" width="1280" height="1280" media="-1" merge="overwrite" hidden="False" locked="False">
-        <live intensity="1" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
-          <color red="255" green="255" blue="255" />
-          <zone1 media="-1" />
-          <zone2 media="-1" />
-        </live>
-        <background path="concircles_42651_lg.gif" scaleX="1.47265625" scaleY="1.47265625" opacity="0.0646153846153678" />
-        <fixtures>
-          <fixture group="RBG01" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="21" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="18" type="line" loop="True" rotation="-8.06583598049141">
-              <points>
-                <point x="699.807582239469" y="1009.88514175224" />
-                <point x="812.398575605381" y="1153.65422374501" />
-                <point x="631.595401637919" y="1179.27634324083" />
-              </points>
-            </geometry>
-          </fixture>
-          <fixture group="RBG01" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="21" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="18" type="line" loop="True" rotation="-8.06583598049141">
-              <points>
-                <point x="699.807582239469" y="1009.88514175224" />
-                <point x="812.398575605381" y="1153.65422374501" />
-                <point x="631.595401637919" y="1179.27634324083" />
-              </points>
-            </geometry>
-          </fixture>
-          <fixture group="T5" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="21" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="18" type="line" loop="True" rotation="-8.06583598049141">
-              <points>
-                <point x="699.807582239469" y="1009.88514175224" />
-                <point x="812.398575605381" y="1153.65422374501" />
-                <point x="631.595401637919" y="1179.27634324083" />
-              </points>
-            </geometry>
-          </fixture>
-          <fixture group="T4" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="21" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="18" type="line" loop="True" rotation="-8.06583598049141">
-              <points>
-                <point x="699.807582239469" y="1009.88514175224" />
-                <point x="812.398575605381" y="1153.65422374501" />
-                <point x="631.595401637919" y="1179.27634324083" />
-              </points>
-            </geometry>
-          </fixture>
-          <fixture group="T3" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="21" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="18" type="line" loop="True" rotation="-8.06583598049141">
-              <points>
-                <point x="699.807582239469" y="1009.88514175224" />
-                <point x="812.398575605381" y="1153.65422374501" />
-                <point x="631.595401637919" y="1179.27634324083" />
-              </points>
-            </geometry>
-          </fixture>
-          <fixture group="T2" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="21" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="18" type="line" loop="True" rotation="-8.06583598049141">
-              <points>
-                <point x="699.807582239469" y="1009.88514175224" />
-                <point x="812.398575605381" y="1153.65422374501" />
-                <point x="631.595401637919" y="1179.27634324083" />
-              </points>
-            </geometry>
-          </fixture>
-          <fixture group="T1" group2="" ledType="RBG" dmxProtocol="ArtNet" startUniverse="21" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="18" type="line" loop="True" rotation="-8.06583598049141">
-              <points>
-                <point x="699.807582239469" y="1009.88514175224" />
-                <point x="812.398575605381" y="1153.65422374501" />
-                <point x="631.595401637919" y="1179.27634324083" />
-              </points>
-            </geometry>
-          </fixture>
-        </fixtures>
-        <schedule stopDuringDaylight="False">
-          <playlists />
-        </schedule>
-      </stage>
     </stages>
     <sequences stopSchedulerDuringDaylight="False">
       <groups />
@@ -866,9 +790,6 @@
         <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
       </stage>
       <stage ID="4a31a43e-c2ab-4f5b-baf7-07e8d2073002">
-        <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
-      </stage>
-      <stage ID="b922de77-a351-4458-a7e3-aba6cf9e5fa3">
         <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
       </stage>
     </stages>
