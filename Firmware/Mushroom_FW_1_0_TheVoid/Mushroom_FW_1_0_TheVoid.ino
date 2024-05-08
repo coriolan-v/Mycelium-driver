@@ -5,20 +5,25 @@
 #include <NativeEthernetUdp.h>
 #include <OctoWS2811.h>
 
-const int numPins = 44;
-byte pinList[numPins] = {
+const int numPins = 39;
+byte pinList[] = {
   23, 22, 21, 20, 19, 18, 17, 16,
-  15, 14, 41, 40, 39, 38, 37, 0,  //36,
-  1, 2, 3, 4, 5, 6, 7, 8,
-  9, 10, 11, 12, 24, 25, 26, 27,
-  30, 35, 34, 33,
-  27, 28, 29, 36
+  15, 14, 41, 40, 39, 38, 37, //36, //0,  //36,
+  36, 35, 34, 33, //1, 2, 3, 4, 5, 6, 7, 8,
+  30, 29, 28, 27,
+  26, 25, 24, 12, 11, 10, 9, 8,
+  7,  6,  5,  4,  3,  2,  1,  0
+
+  
+  //9, 10, 11, 12, 24, 25, 26, 27,
+  //30, 35, 34, 33,
+  //27, 28, 29, 36
 };
 
 
 // OctoWS2811 settings
 const int ledsPerStrip = 100;  // change for your setup
-const byte numStrips = 44;     // change for your setup
+const byte numStrips = 39;     // change for your setup
 const int numLeds = ledsPerStrip * numStrips;
 // 6*36 = 216
 // 100 * 8 = 800
@@ -38,7 +43,7 @@ const int startUniverse = 0;  // CHANGE FOR YOUR SETUP most software this is 1, 
 
 // Check if we got all universes
 //const int maxUniverses = numberOfChannels / 512 + ((numberOfChannels % 512) ? 1 : 0);
-const int maxUniverses = 44;
+const int maxUniverses = 39;
 bool universesReceived[maxUniverses];
 bool sendFrame = 1;
 int previousDataLength = 0;
@@ -62,12 +67,12 @@ void setup() {
 
   initLED(0, 25, 0);
 
+  initLED(25, 0, 0);
+
   Serial.println("READY");
 }
 
 void loop() {
-  //initTest();
-  // we call the read function inside the loop
   artnet.read();
 }
 
@@ -89,7 +94,6 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
     universesReceived[universe - startUniverse] = 1;
   }
 
-
   for (int i = 0; i < maxUniverses; i++) {
     if (universesReceived[i] == 0) {
       sendFrame = 0;
@@ -104,20 +108,6 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
     led++;
   }
 
-  // if (universe < 36) {
-  //   led = universe * 6;
-  //   for (int i = 0; i < 6; i++) {
-  //     leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-  //     led++;
-  //   }
-  // } else if (universe >= 36 && universe < 44){
-  //   led = universe * 100;
-  //   for (int i = 0; i < 100; i++) {
-  //     leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
-  //     led++;
-  //   }
-  // }
-
 
   if (sendFrame) {
     leds.show();
@@ -126,30 +116,13 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
   }
 }
 
+
 void initLED(int r, int g, int b) {
   for (int i = 0; i < numLeds; i++) {
     leds.setPixel(i, r, g, b);
     leds.show();
   }
   delay(500);
-  for (int i = 0; i < numLeds; i++)
-    leds.setPixel(i, 0, 0, 0);
-  leds.show();
-}
-
-void initTest() {
-  for (int i = 0; i < numLeds; i++)
-    leds.setPixel(i, 127, 0, 0);
-  leds.show();
-  delay(1000);
-  for (int i = 0; i < numLeds; i++)
-    leds.setPixel(i, 0, 127, 0);
-  leds.show();
-  delay(1000);
-  for (int i = 0; i < numLeds; i++)
-    leds.setPixel(i, 0, 0, 127);
-  leds.show();
-  delay(1000);
   for (int i = 0; i < numLeds; i++)
     leds.setPixel(i, 0, 0, 0);
   leds.show();
