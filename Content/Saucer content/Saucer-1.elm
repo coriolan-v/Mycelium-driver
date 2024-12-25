@@ -9,7 +9,7 @@
         </live>
         <fixtures>
           <fixture group="RGB01" group2="" ledType="GRB" dmxProtocol="ArtNet" startUniverse="0" startAddress="0" breakUniverseAfter="0">
-            <geometry nbLeds="100" type="line" rotation="0">
+            <geometry nbLeds="170" type="line" rotation="0">
               <points>
                 <point x="0" y="0" />
                 <point x="1279" y="0" />
@@ -181,6 +181,67 @@
           <playlists />
         </schedule>
       </stage>
+      <stage name="Portal" id="d6ed1742-f44d-4117-b07c-fa432905b90f" width="1280" height="720" media="-1" merge="overwrite" hidden="False" locked="False">
+        <live intensity="1" crossfadeMs="2000" fadePosition="0" mixEffect="CrossFade" mixEffectPositionTransform="sigmoid" speed="1">
+          <color red="255" green="255" blue="255" />
+          <zone1 media="-1" />
+          <zone2 media="-1" />
+        </live>
+        <fixtures>
+          <fixture group="RGB01" group2="" ledType="RGB" dmxProtocol="ArtNet" startUniverse="3" startAddress="0" breakUniverseAfter="0">
+            <geometry nbLeds="76" type="curve" rotation="0">
+              <points>
+                <point x="999" y="359.5" />
+                <point x="993.513244628906" y="427.203521728516" />
+                <point x="975.393188476563" y="492.626525878906" />
+                <point x="943.967529296875" y="552.79638671875" />
+                <point x="901.454895019531" y="605.76416015625" />
+                <point x="850.906921386719" y="651.147705078125" />
+                <point x="792.973693847656" y="686.544311523438" />
+                <point x="728.945007324219" y="709.081420898438" />
+                <point x="661.683227539063" y="718.451782226563" />
+                <point x="593.772155761719" y="716.583068847656" />
+                <point x="527.289245605469" y="702.7978515625" />
+                <point x="465.099945068359" y="675.597351074219" />
+                <point x="409.697631835938" y="636.334594726563" />
+                <point x="361.737548828125" y="588.215026855469" />
+                <point x="322.697021484375" y="532.656860351563" />
+                <point x="295.775085449219" y="470.346435546875" />
+                <point x="282.263946533203" y="403.806396484375" />
+                <point x="280" y="359.500030517578" />
+              </points>
+            </geometry>
+          </fixture>
+          <fixture group="RGB01" group2="" ledType="RGB" dmxProtocol="ArtNet" startUniverse="3" startAddress="228" breakUniverseAfter="0">
+            <geometry nbLeds="74" type="curve" rotation="0">
+              <points>
+                <point x="998.748901367188" y="344.402923583984" />
+                <point x="991.865081787109" y="282.847869873047" />
+                <point x="974.243530273438" y="223.495910644531" />
+                <point x="945.558532714844" y="168.630630493164" />
+                <point x="907.527709960938" y="119.745414733887" />
+                <point x="862.618560791016" y="77.0670776367188" />
+                <point x="811.533172607422" y="42.0654830932617" />
+                <point x="754.8359375" y="17.2053890228271" />
+                <point x="694.4423828125" y="3.54046249389648" />
+                <point x="632.591186523438" y="0.0519358552992344" />
+                <point x="570.9013671875" y="5.64091491699219" />
+                <point x="511.126403808594" y="21.7791175842285" />
+                <point x="455.552917480469" y="49.0632057189941" />
+                <point x="405.845825195313" y="86.0064010620117" />
+                <point x="362.322448730469" y="130.098770141602" />
+                <point x="326.153747558594" y="180.369125366211" />
+                <point x="299.848388671875" y="236.411590576172" />
+                <point x="284.722717285156" y="296.45263671875" />
+                <point x="280.251159667969" y="344.402923583984" />
+              </points>
+            </geometry>
+          </fixture>
+        </fixtures>
+        <schedule stopDuringDaylight="False">
+          <playlists />
+        </schedule>
+      </stage>
     </stages>
     <sequences stopSchedulerDuringDaylight="False">
       <groups />
@@ -230,7 +291,9 @@
     </media>
     <output>
       <artnet sendPartialFrames="False" sendArtSync="False">
-        <universes />
+        <universes>
+          <universe id="0" IP="10.0.0.9" />
+        </universes>
       </artnet>
       <sAcn outputUniverseOffset="0" optimizeFrames="True" priority="100" sendSync="False">
         <universes />
@@ -255,6 +318,9 @@
     <previews />
     <stages>
       <stage ID="c6493979-9528-4629-9ef6-a1ab788bb08d">
+        <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
+      </stage>
+      <stage ID="d6ed1742-f44d-4117-b07c-fa432905b90f">
         <grid isVisible="False" squareWidth="20" squareHeight="20" squareOffsetX="0" squareOffsetY="0" />
       </stage>
     </stages>

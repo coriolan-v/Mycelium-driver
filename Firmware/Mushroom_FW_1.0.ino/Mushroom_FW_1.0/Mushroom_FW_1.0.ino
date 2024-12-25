@@ -10,7 +10,7 @@ byte pinList[numPins] =   {
   23, 22, 21, 20, 19, 18, 17, 16,
   15, 14, 41, 40, 39, 38, 37, //36,
   0, 1, 2, 3, 4, 5, 6, 7,
-  8, 9, 10, 11, 12, 24, 25, 26, 27
+ 8, 9, 10, 11, 12, 24, 25, 26, 27
 };
 
 
@@ -79,8 +79,8 @@ void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* d
     }
   }
 
-  led = universe * 100;
-  for(int i = 0; i<100; i++)
+  led = universe * ledsPerStrip;
+  for(int i = 0; i<ledsPerStrip; i++)
   {
     leds.setPixel(led, data[i * 3], data[i * 3 + 1], data[i * 3 + 2]);
     led++;
