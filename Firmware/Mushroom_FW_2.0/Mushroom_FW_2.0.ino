@@ -46,25 +46,25 @@ void loop() {
 }
 
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data) {
-  Serial.println("Frame received");
+ // Serial.println("Frame received");
 
   uint16_t u = universe - startUniverse;
   if (u >= maxUniverses) return;
 
   uint16_t offset = u * channelsPerUniverse;
 
-  Serial.print("Universe ");
-  Serial.print(universe);
-  Serial.print(" | Length: ");
-  Serial.print(length);
-  Serial.print(" | Offset: ");
-  Serial.print(offset);
-  Serial.print(" | First bytes: ");
-  for (int i = 0; i < 6 && i < length; i++) {
-    Serial.print(data[i], HEX);
-    Serial.print(" ");
-  }
-  Serial.println();
+  // Serial.print("Universe ");
+  // Serial.print(universe);
+  // Serial.print(" | Length: ");
+  // Serial.print(length);
+  // Serial.print(" | Offset: ");
+  // Serial.print(offset);
+  // Serial.print(" | First bytes: ");
+  // for (int i = 0; i < 6 && i < length; i++) {
+  //   Serial.print(data[i], HEX);
+  //   Serial.print(" ");
+  // }
+  // Serial.println();
 
   uint16_t copyLen = min(length, totalChannels - offset);
   memcpy(&ledData[offset], data, copyLen);
