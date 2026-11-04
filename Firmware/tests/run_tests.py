@@ -15,9 +15,9 @@ if not compiler:
 
 build = root / ".pio/receiver-tests"
 build.mkdir(parents=True, exist_ok=True)
-exe = build / ("receiver-tests.exe" if os.name == "nt" else "receiver-tests")
 env = os.environ.copy()
 env["PATH"] = str(Path(compiler).resolve().parent) + os.pathsep + env.get("PATH", "")
+exe = build / ("receiver-tests.exe" if os.name == "nt" else "receiver-tests")
 subprocess.run([
     compiler, "-std=c++14", "-O3", "-Wall", "-Wextra", "-Werror",
     "-static", "-I", str(root / "include"),

@@ -27,8 +27,15 @@
 #if defined(__IMXRT1062__)
 
 #define TH_TL	1.25e-6
+#if defined(MUSHROOM_TM1812) && MUSHROOM_TM1812
+// TM1812 input timings: 400 ns zero high, 850 ns one high, 800 kHz.
+// Retain the 300 us inter-frame reset below (TM1812 V1.6 requires >=200 us).
+#define T0H	0.40e-6
+#define T1H	0.85e-6
+#else
 #define T0H	0.30e-6
 #define T1H	0.75e-6
+#endif
 
 // Ordinary RGB data is converted to GPIO bitmasks on-the-fly using
 // a transmit buffer sized for 2 DMA transfers.  The larger this setting,

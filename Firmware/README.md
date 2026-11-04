@@ -1,119 +1,189 @@
 # Mushroom firmware v3.0
 
-Teensy 4.1 Art-Net receiver for **16 parallel outputs, 3 universes per output**.
-Each universe carries 170 RGB pixels (510 channels). Each output therefore
-drives 510 LEDs: 8,160 LEDs and 48 universes in total.
+Each Teensy 4.1 is an independent Art-Net/ArtSync receiver with its own IP and
+universe range. There is one PlatformIO environment, `teensy41`, and no driver
+numbering or automatic address offsets.
 
-## Build and upload
+## Set the IP
 
-Open this `Firmware` folder in VS Code with PlatformIO IDE. From a PlatformIO
-terminal:
+Edit the settings at the top of `include/config.h` before uploading each board:
 
-```sh
-pio run
-pio run --target upload
+```cpp
+constexpr uint8_t kIP[] = {10, 0, 0, 9};
+constexpr uint8_t kNetmask[] = {255, 0, 0, 0};
+constexpr uint8_t kGateway[] = {0, 0, 0, 0};
+constexpr uint16_t kStartUniverse = 0;
+constexpr size_t kActivePorts = 16;
 ```
 
-The default build uses `Mushroom_FW_3.0/main.cpp`, the local OctoWS2811 library, and pinned
-QNEthernet 0.37.0. PlatformIO installs dependencies on the first build. The old
-Arduino sketches and `_dev` experiments remain as references and are excluded
-from the build. NativeEthernet, FNET, and the old Art-Net library are excluded.
-Connect the Teensy over USB to upload. If automatic reset fails, press its
-program button when prompted.
+For two controllers, use unique IPs, for example `10.0.0.9` and `10.0.0.10`.
+Both may use universes **0-47**: Unity sends different data to each board's IP
+using unicast on UDP port 6454. Change `kStartUniverse` only if you want a
+different range on that controller. The board uses its unique factory MAC.
+Configure the Unity computer's lighting interface on the same subnet.
 
-The firmware version is `3.0.0`. The upload image is generated at
-`.pio/build/teensy41/Mushroom_FW_3.0.hex`.
+## Build, upload, and see FPS
 
-## Sender configuration and wiring
+Open this `Firmware` folder in VS Code with PlatformIO IDE. Connect the board
+whose IP you just configured, then run:
 
-Set the sender to unicast ArtDmx to **10.0.0.9:6454**, with RGB channel order
-and 510 channels per universe. The receiver accepts 512-channel packets too,
-but ignores channels 511 and 512; pixels never span universe boundaries.
+```sh
+pio run --target upload
+pio device monitor -b 115200
+```
 
-Configuration is in `include/config.h`. The subnet is `255.0.0.0`; no gateway
-or DHCP is needed for a local lighting network. The board uses its unique
-factory MAC. Set a unique static IP for each controller.
+Change `kIP` before building and uploading to the other board. If multiple boards
+are connected, use `--upload-port COMx` for upload and `--port COMx` for the monitor.
+Press the program button if automatic reset fails. `pio run` builds without uploading.
 
-| Output | Teensy pin | Art-Net wire universes | Pixels |
-| --- | --- | --- | --- |
-| 1 | 0 | 0–2 | 510 |
-| 2 | 1 | 3–5 | 510 |
-| 3 | 2 | 6–8 | 510 |
-| 4 | 3 | 9–11 | 510 |
-| 5 | 4 | 12–14 | 510 |
-| 6 | 5 | 15–17 | 510 |
-| 7 | 6 | 18–20 | 510 |
-| 8 | 7 | 21–23 | 510 |
-| 9 | 8 | 24–26 | 510 |
-| 10 | 9 | 27–29 | 510 |
-| 11 | 10 | 30–32 | 510 |
-| 12 | 11 | 33–35 | 510 |
-| 13 | 12 | 36–38 | 510 |
-| 14 | 24 | 39–41 | 510 |
-| 15 | 25 | 42–44 | 510 |
-| 16 | 26 | 45–47 | 510 |
+The image is `.pio/build/teensy41/Mushroom_FW_3.0.hex`. PlatformIO installs the
+pinned Teensy platform and QNEthernet dependency on the first build. Sources
+are in `Mushroom_FW_3.0/main.cpp`; older sketches are excluded from the build.
 
-These pins follow the first 16 entries of `_dev/Mushroom_FW_2`. Adjust `kPins`
-to match the actual controller wiring. Sender interfaces that label universes
-starting at 1 may display these as 1–48; the addresses on the wire are 0–47.
-Connect the Teensy native Ethernet interface and use suitable LED data level
-shifting and a shared ground. LED output is GRB at 800 kHz.
+## Port layout and capacity
 
-## Performance and frame behaviour
+Each rod has 36 RGB pixels. Ten rods per output means **360 pixels per output**,
+using three ArtDmx universes: **510 + 510 + 60 channels**. The third universe
+contains the last 20 pixels. Padded 512-channel packets are accepted; padding
+cannot spill into the next output. Input and TM1812 wire order are RGB. This
+exchanges red and green relative to the previous firmware's GRB output, as
+requested; blue is unchanged. Unity should continue sending RGB. The receiver
+copies pixel bytes directly, with no per-pixel colour conversion.
 
-- 600 MHz CPU, `-O3` and link-time optimisation; no overclock required.
-- Direct lwIP UDP receive callbacks avoid an Arduino UDP packet queue and
-  additional application packet copies for contiguous packets.
-- Incoming RGB is converted directly into the drawing buffer. There is no
-  per-pixel API dispatch or second full-frame colour conversion.
-- OctoWS2811 drives all 16 pins simultaneously using DMA while the main loop
-  continues receiving. Separate drawing/display buffers prevent DMA tearing.
-- No application `delay()`, USB wait, startup animation, or per-packet logging.
-  `show()` is called only after DMA and the reset interval finish. The local
-  driver fixes a `busy()` bug that previously ignored active DMA.
-- A complete set of 48 universes is presented as soon as the output is free.
-  If packets are missing, a non-blocking 15.6 ms deadline from the first pending
-  packet allows an incomplete update; missing universes retain their last
-  values. Short universes clear their remaining pixels.
-- While output is busy, incoming data replaces pending values instead of
-  building a frame queue. Above the LED refresh rate, intermediate frames are
-  discarded and a snapshot can contain the latest values from different source
-  frames. This favours latency over preserving every source frame.
-- ArtDmx sequence checks operate independently per universe, handle 255-to-1
-  wrap, and reset after one second of inactivity. Sequence 0 disables ordering.
-  Use one sender per receiver; source merging is not implemented.
+The PlatformIO build enables `MUSHROOM_TM1812=1` in the local OctoWS2811 driver:
+nominal 400 ns zero-high pulses, 850 ns one-high pulses, and 800 kHz signalling.
+The existing 300 us reset interval is retained, covering the 200 us minimum in
+the [TM1812 V1.6 datasheet](https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1812_V1.6.pdf).
+The driver transmits the prepared bytes without an additional colour swap.
+Use a suitable 5 V logic buffer; the datasheet specifies a 3.8 V minimum high
+input. Verify colours and waveform timings on the actual rods.
 
-At 800 kHz, 510 RGB pixels take 15.3 ms to transmit. The driver adds a 300 µs
-reset interval, giving a **theoretical ceiling of about 64 FPS** before CPU and
-network overhead. This is a calculated limit, not a measured hardware result.
-Changing CPU speed cannot remove the LED wire time. Prefer unicast and a wired
-network. Configure the sender for up to 60 FPS initially.
+| Teensy pin | Universes with start universe 0 |
+| --- | --- |
+| 0 | 0-2 |
+| 1 | 3-5 |
+| 2 | 6-8 |
+| 3 | 9-11 |
+| 4 | 12-14 |
+| 5 | 15-17 |
+| 6 | 18-20 |
+| 7 | 21-23 |
+| 8 | 24-26 |
+| 9 | 27-29 |
+| 10 | 30-32 |
+| 11 | 33-35 |
+| 12 | 36-38 |
+| 24 | 39-41 |
+| 25 | 42-44 |
+| 26 | 45-47 |
 
-This is a directly addressed ArtDmx receiver. ArtPoll discovery, ArtSync frame
-locking, RDM, and multiple-source merging are not implemented. It holds the
-last output if input stops. `receiver.stats` exposes counters to a debugger
-without adding serial traffic to the receive loop.
+All 16 ports are enabled. Each board supports **160 rods / 5,760 pixels** at
+these settings, or **320 rods / 11,520 pixels across two boards**. This layout
+does not accommodate the earlier 600-rod total; that would need a different
+rod distribution, strip length, and universe allocation or more controllers.
 
-## Verification
+Change `kPins` to match your wiring. Physical pin numbers need not be consecutive.
+`kActivePorts` enables the first N entries. Some sender interfaces display wire
+universe 0 as universe 1. Use native Ethernet, suitable LED data level shifting,
+and a shared ground.
 
-`pio run` compiles the Teensy firmware. Portable receiver tests compile and
-execute the same parser, mapping, sequencing, and frame-deadline code on a PC:
+## ArtSync with Unity
+
+For a coordinated lighting frame, unicast each controller's universe data to
+its own IP, then broadcast one ArtSync on UDP port 6454. With the configured
+/8 subnet, use `10.255.255.255`. Both controllers retain their independent
+content and addresses; matching broadcast ArtSync coordinates their release.
+There is no master/slave relationship between controllers.
+
+Using an existing C# `System.Net.Sockets.UdpClient` sender:
+
+```csharp
+byte[] artSync = {
+    0x41, 0x72, 0x74, 0x2D, 0x4E, 0x65, 0x74, 0x00,
+    0x00, 0x52, // OpSync, little endian
+    0x00, 0x0E, // protocol version 14
+    0x00, 0x00
+};
+udp.EnableBroadcast = true;
+// Reuse the ArtDmx socket, bound to the lighting network interface.
+// Send once after all the current frame's ArtDmx packets.
+udp.Send(artSync, artSync.Length,
+    new System.Net.IPEndPoint(System.Net.IPAddress.Parse("10.255.255.255"), 6454));
+```
+
+ArtSync must come from the same source IP as the controller's current ArtDmx
+sender. Each board starts asynchronously and enters sync mode on its first
+matching ArtSync. Released frames are frozen separately from arriving data.
+If DMA is busy, the snapshot waits without blocking reception. A newer released
+snapshot replaces an unsent one instead of building a latency queue.
+
+While synchronized, data is released only on matching ArtSync. After four
+seconds without sync, each controller independently returns to asynchronous
+operation. In that mode, a complete set of universes releases when output is
+free; partial updates have a non-blocking 11.1 ms deadline. Missing universes
+retain their last values; short universes clear unused pixels. Empty syncs
+do not repeatedly transmit unchanged output. Use one sender per controller;
+source merging is not implemented.
+
+Source matching and fallback follow the
+[Art-Net specification](https://art-net.org.uk/downloads/art-net.pdf). ArtSync
+coordinates release, not hardware clocks: network timing and busy outputs can
+still introduce differences. Broadcasts must reach the lighting LAN.
+
+## FPS report
+
+The USB monitor receives a report once per second. Example:
+
+```text
+fps=60.0 mode=SYNC frames=600 partial=0 sync=600 replaced=0 bad=0 old=0
+```
+
+This is example output, not a hardware benchmark.
+
+- `fps`: completed LED transfers per second over the actual elapsed interval,
+  counted after DMA and the reset interval finish. It is not Unity FPS or packet rate.
+- `mode`: `SYNC` or `ASYNC`.
+- `frames`: cumulative completed network-driven frames, excluding startup black.
+- `partial`: cumulative submitted frames missing expected universes.
+- `sync`: cumulative matching ArtSync packets.
+- `replaced`: snapshots replaced or cancelled before output could start.
+- `bad`: malformed, unsupported, or unmapped packets; not a network-loss counter.
+- `old`: duplicate or out-of-order ArtDmx packets rejected by sequence checks.
+
+Reporting does not wait for USB connection and skips reports when the transmit
+queue lacks room. There is no per-frame or per-packet serial logging. For an
+independent physical check, measure intervals between LED data bursts using a
+logic analyser: `FPS = 1,000,000 / interval_us`. Each burst lasts about 10.8 ms.
+
+## Performance and verification
+
+600 MHz CPU, `-O3`, link-time optimisation, direct UDP callbacks, and parallel
+DMA output. Separate staging, released-frame, and display buffers prevent
+incoming packets from changing output in progress. No application delays,
+USB connection wait, or startup animation. The bundled LED driver fixes its
+DMA-busy check. Sequence checks handle wrap and reset after sender inactivity.
+
+360 RGB pixels take 10.8 ms at 800 kHz plus the driver's 300 us reset interval:
+about **90 FPS theoretical maximum**, before software and network overhead.
+Start Unity at 60 FPS and measure on hardware. Pending frames may be replaced
+if the sender exceeds the output rate.
+
+Run portable tests for the currently configured controller with:
 
 ```sh
 python tests/run_tests.py
 ```
 
-The test runner uses `g++`, `clang++`, or the compiler selected by `CXX`.
-On Windows without a host compiler, an optional project-local installation is:
+Tests cover mapping, final-universe clipping, malformed packets, sequence and
+clock wrap, ArtSync source filtering/timeout, frozen snapshots, and FPS timing.
+The runner uses `g++`, `clang++`, or the compiler in `CXX`. An optional Windows
+compiler can be installed locally:
 
 ```sh
 mkdir .pio/test-tools
 pio pkg install --global --storage-dir .pio/test-tools --tool platformio/toolchain-gccmingw32
 ```
 
-Hardware validation still requires checking colour order and all 16 outputs,
-then streaming all 48 universes at the desired frame rate while checking packet
-loss, output timing, and Ethernet reconnect behaviour.
-
-QNEthernet is distributed under AGPL-3.0-or-later; its license and dependencies
-are included in the installed package.
+Hardware validation still requires checking colours, all outputs, FPS, dropped
+sync, and Ethernet reconnect. ArtPoll discovery and RDM are not implemented.
+QNEthernet is AGPL-3.0-or-later; its license is in the installed package.
