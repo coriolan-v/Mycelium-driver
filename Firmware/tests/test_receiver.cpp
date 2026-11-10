@@ -54,8 +54,9 @@ struct Fixture {
 
 void mapping() {
   Fixture f;
-  check(kPinCount == 16 && kUniverseCount == kActivePorts * 3 && kLedsPerPin == 360 &&
-            kFrameBytes == kActivePorts * 1080, "360 pixels per active output");
+  check(kPinCount == 16 && kUniverseCount == kActivePorts * 3 && kLedsPerPin == 510 &&
+            kFrameBytes == kActivePorts * 1530, "three full RGB universes per output");
+  check(kOutputCycleUs == 15600, "output cycle includes all 510 pixels and reset");
   check(sizeof(kIP) == 4 && kStartUniverse + kUniverseCount <= 32768,
         "independent controller address and valid universe range");
   check(!f.receiver.ready(0xFFFFFFFF), "empty receiver never ready");
@@ -71,8 +72,8 @@ void mapping() {
   }
   for (size_t index = 0; index < kUniverseCount; ++index) {
     const size_t channel = index % 3 * 510;
-    const size_t capacity = channel == 1020 ? 60 : 510;
-    const auto* pixel = f.buffer.data() + 1 + index / 3 * 1080 + channel;
+    const size_t capacity = 510;
+    const auto* pixel = f.buffer.data() + 1 + index / 3 * 1530 + channel;
     check(pixel[0] == index && pixel[1] == 22 && pixel[2] == 33,
           "correct packed universe offset and requested TM1812 R/G swap");
     check(pixel[capacity - 3] == 11 && pixel[capacity - 2] == 22 &&
@@ -284,16 +285,28 @@ void fpsReporting() {
 
 void finalUniverseClipping() {
   Fixture f;
-  auto packet = dmx(2, 1, 60);
-  check(f.receive(packet), "third universe accepts exactly 60 channels");
-  check(f.receiver.ready(100 + kPartialFrameTimeoutUs), "release short final universe");
-  check(f.buffer[1021] == 11 && f.buffer[1080] == 33,
-        "third universe maps exactly the final 20 pixels");
-  check(f.buffer[1081] == 0, "third universe cannot touch the next output");
+  auto packet = dmx(2, 1, 510);
+  packet[525] = 91; packet[526] = 92; packet[527] = 93;
+  check(f.receive(packet), "third universe accepts all 510 channels");
+  check(f.receiver.ready(100 + kPartialFrameTimeoutUs), "release full final universe");
+  check(f.buffer[1021] == 11 && f.buffer[1528] == 91 &&
+            f.buffer[1529] == 92 && f.buffer[1530] == 93,
+        "third universe maps all 170 pixels including port pixel 510");
+  check(f.buffer[1531] == 0, "third universe cannot touch the next output");
   f.receiver.presented();
-  check(f.receive(dmx(2, 2, 512), 20000), "padded final universe accepted");
+  auto padded = dmx(2, 2, 512);
+  padded[528] = 0xEF; padded[529] = 0xFE;
+  check(f.receive(padded, 20000), "padded final universe accepted");
   check(f.receiver.ready(20000 + kPartialFrameTimeoutUs), "release padded final universe");
-  check(f.buffer[1081] == 0, "padded third universe cannot spill into next port");
+  check(f.buffer[1531] == 0 && f.buffer[1532] == 0,
+        "channels 511/512 cannot spill into next port");
+  f.receiver.presented();
+  check(f.receive(dmx(2, 3, 60), 40000), "short third universe still accepted");
+  check(f.receiver.ready(40000 + kPartialFrameTimeoutUs), "release short third universe");
+  check(f.buffer[1080] == 33, "short packet preserves its first 20 pixels");
+  for (size_t i = 1081; i <= 1530; ++i) {
+    check(f.buffer[i] == 0, "short third universe clears its remaining pixels");
+  }
   f.guards();
 }
 

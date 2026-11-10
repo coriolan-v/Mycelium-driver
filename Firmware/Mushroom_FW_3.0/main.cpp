@@ -15,7 +15,7 @@ using namespace mushroom;
 namespace qn = qindesign::network;
 
 // The ISR reads displayMemory; receive callbacks write only drawingMemory.
-// 17,280 bytes per buffer by default: 16 active ports of 360 RGB LEDs.
+// 24,480 bytes per buffer by default: 16 active ports of 510 RGB LEDs.
 DMAMEM uint8_t displayMemory[kFrameBytes] __attribute__((aligned(32)));
 alignas(32) uint8_t drawingMemory[kFrameBytes];
 OctoWS2811 leds(kLedsPerPin, displayMemory, drawingMemory,
@@ -27,6 +27,9 @@ bool frameInFlight = false;
 udp_pcb* artnetSocket = nullptr;
 bool ethernetStarted = false;
 bool clearOnStartup = true;
+bool startupActive = kStartupTestEnabled;
+uint8_t startupPhase = 0;
+uint32_t startupColourSinceUs = 0;
 uint32_t lastStartAttemptMs = 0;
 
 IPAddress ip(const uint8_t (&address)[4]) {
@@ -37,6 +40,11 @@ IPAddress ip(const uint8_t (&address)[4]) {
 // Consume a contiguous packet in place; only chained pbufs need a scratch copy.
 void receivePacket(void*, udp_pcb*, pbuf* packet, const ip_addr_t* source, u16_t) {
   if (packet == nullptr) return;
+  // Keep Unity from interrupting the visual test while Ethernet is serviced.
+  if (startupActive) {
+    pbuf_free(packet);
+    return;
+  }
   const uint32_t sourceIP = ip4_addr_get_u32(ip_2_ip4(source));
   if (packet->tot_len >= 12 && packet->tot_len <= 530) {
     const auto* data = static_cast<const uint8_t*>(packet->payload);
@@ -91,12 +99,38 @@ void reportFps(uint32_t now) {
     Serial.write(reinterpret_cast<const uint8_t*>(line), size_t(length));
   }
 }
+bool serviceStartupTest() {
+  if (!startupActive) return false;
+  if (leds.busy()) return true;
+  if (startupPhase == 4) {
+    // Final black frame completed. Exclude the entire startup test from FPS.
+    startupActive = false;
+    clearOnStartup = false;
+    fps = FpsMeter(micros(), completedFrames);
+    return false;
+  }
+  if (startupPhase != 0 &&
+      uint32_t(micros() - startupColourSinceUs) < kStartupColourHoldUs) {
+    return true;
+  }
+  std::memset(drawingMemory, 0, sizeof(drawingMemory));
+  if (startupPhase < 3) {
+    // Use normal TM1812 RGB wire order on every pixel of every enabled port.
+    for (size_t pixel = 0; pixel < kFrameBytes; pixel += 3) {
+      drawingMemory[pixel + startupPhase] = kStartupBrightness;
+    }
+  }
+  leds.show();  // DMA/reset already idle; no blocking wait.
+  startupColourSinceUs = micros();
+  ++startupPhase;
+  return true;
+}
 }  // namespace
 
 void setup() {
   Serial.begin(115200);
   leds.begin();
-  // Static addressing: no DHCP, link wait, USB wait, or startup light show.
+  // Static addressing: no DHCP, link wait, or USB wait.
   startNetwork();
 }
 
@@ -105,6 +139,8 @@ void loop() {
   if (artnetSocket == nullptr && uint32_t(millis() - lastStartAttemptMs) >= 1000) {
     startNetwork();
   }
+
+  if (serviceStartupTest()) return;
 
   // busy() covers both active DMA and the LED reset interval. Never enter
   // show() while it would wait. Its buffer copy/initial DMA preparation still

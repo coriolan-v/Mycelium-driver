@@ -42,9 +42,9 @@ are in `Mushroom_FW_3.0/main.cpp`; older sketches are excluded from the build.
 
 ## Port layout and capacity
 
-Each rod has 36 RGB pixels. Ten rods per output means **360 pixels per output**,
-using three ArtDmx universes: **510 + 510 + 60 channels**. The third universe
-contains the last 20 pixels. Padded 512-channel packets are accepted; padding
+Each output drives **510 RGB pixels**, using three full RGB ArtDmx universes:
+**510 + 510 + 510 channels**, with 170 pixels per universe. The third universe
+contains pixels 341-510. Padded 512-channel packets are accepted; padding
 cannot spill into the next output. Input and TM1812 wire order are RGB. This
 exchanges red and green relative to the previous firmware's GRB output, as
 requested; blue is unchanged. Unity should continue sending RGB. The receiver
@@ -77,8 +77,10 @@ input. Verify colours and waveform timings on the actual rods.
 | 25 | 42-44 |
 | 26 | 45-47 |
 
-All 16 ports are enabled. Each board supports **160 rods / 5,760 pixels** at
-these settings, or **320 rods / 11,520 pixels across two boards**. This layout
+All 16 ports are enabled. Each board supports **8,160 pixels**, or **16,320
+pixels across two boards**. With 36 pixels per rod, each output can drive 14
+complete rods (504 pixels), leaving six pixel slots unused. That is 224 whole
+rods per board or 448 across two boards. This layout
 does not accommodate the earlier 600-rod total; that would need a different
 rod distribution, strip length, and universe allocation or more controllers.
 
@@ -120,7 +122,7 @@ snapshot replaces an unsent one instead of building a latency queue.
 While synchronized, data is released only on matching ArtSync. After four
 seconds without sync, each controller independently returns to asynchronous
 operation. In that mode, a complete set of universes releases when output is
-free; partial updates have a non-blocking 11.1 ms deadline. Missing universes
+free; partial updates have a non-blocking 15.6 ms deadline. Missing universes
 retain their last values; short universes clear unused pixels. Empty syncs
 do not repeatedly transmit unchanged output. Use one sender per controller;
 source merging is not implemented.
@@ -131,6 +133,16 @@ coordinates release, not hardware clocks: network timing and busy outputs can
 still introduce differences. Broadcasts must reach the lighting LAN.
 
 ## FPS report
+
+On every boot, all LEDs on all enabled outputs show **red, green, then blue**
+at **20% channel intensity (51/255)** for **250 ms per colour**, then turn black.
+The test takes about 0.8 seconds including LED transfers. It uses the same RGB
+wire order as normal TM1812 output. Timing is non-blocking and Ethernet stays
+serviced, but incoming Art-Net packets are discarded until the final black
+frame finishes so Unity cannot interrupt the test. Normal reception resumes
+automatically; the sender should keep streaming. Startup frames are excluded
+from FPS. Adjust `kStartupTestEnabled`, `kStartupBrightness`, and
+`kStartupColourHoldUs` in `include/config.h` to disable or change the test.
 
 The USB monitor receives a report once per second. Example:
 
@@ -153,18 +165,18 @@ This is example output, not a hardware benchmark.
 Reporting does not wait for USB connection and skips reports when the transmit
 queue lacks room. There is no per-frame or per-packet serial logging. For an
 independent physical check, measure intervals between LED data bursts using a
-logic analyser: `FPS = 1,000,000 / interval_us`. Each burst lasts about 10.8 ms.
+logic analyser: `FPS = 1,000,000 / interval_us`. Each burst lasts about 15.3 ms.
 
 ## Performance and verification
 
 600 MHz CPU, `-O3`, link-time optimisation, direct UDP callbacks, and parallel
 DMA output. Separate staging, released-frame, and display buffers prevent
 incoming packets from changing output in progress. No application delays,
-USB connection wait, or startup animation. The bundled LED driver fixes its
+or USB connection wait. The bundled LED driver fixes its
 DMA-busy check. Sequence checks handle wrap and reset after sender inactivity.
 
-360 RGB pixels take 10.8 ms at 800 kHz plus the driver's 300 us reset interval:
-about **90 FPS theoretical maximum**, before software and network overhead.
+510 RGB pixels take 15.3 ms at 800 kHz plus the driver's 300 us reset interval:
+about **64 FPS theoretical maximum**, before software and network overhead.
 Start Unity at 60 FPS and measure on hardware. Pending frames may be replaced
 if the sender exceeds the output rate.
 

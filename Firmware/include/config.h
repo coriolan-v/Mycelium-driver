@@ -15,16 +15,22 @@ constexpr uint8_t kGateway[] = {0, 0, 0, 0};
 constexpr uint16_t kStartUniverse = 0;
 constexpr size_t kActivePorts = 16;
 
+// Startup debug: all pixels red, green, blue at 20%, then black.
+constexpr bool kStartupTestEnabled = true;
+constexpr uint8_t kStartupBrightness = 51;  // 51 / 255 = 20% channel intensity.
+constexpr uint32_t kStartupColourHoldUs = 250000;  // 250 ms per colour.
+
 // Output order follows the first 16 entries of _dev/Mushroom_FW_2.
 constexpr uint8_t kPins[] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 25, 26};
 constexpr size_t kPinCount = sizeof(kPins) / sizeof(kPins[0]);
 constexpr size_t kPixelsPerRod = 36;
-constexpr size_t kRodsPerPort = 10;
 constexpr size_t kUniversesPerPin = 3;
 constexpr size_t kChannelsPerUniverse = 510;
 constexpr size_t kUniverseCount = kActivePorts * kUniversesPerPin;
-constexpr size_t kLedsPerPin = kPixelsPerRod * kRodsPerPort;
+// Three full RGB universes: 170 pixels each, 510 pixels per port.
+// Channels 511/512 in a 512-channel ArtDmx packet remain padding.
+constexpr size_t kLedsPerPin = kUniversesPerPin * kChannelsPerUniverse / 3;
 constexpr size_t kBytesPerPort = kLedsPerPin * 3;
 constexpr size_t kFrameBytes = kActivePorts * kBytesPerPort;
 constexpr uint16_t kArtNetPort = 6454;

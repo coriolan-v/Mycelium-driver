@@ -96,8 +96,8 @@ class Receiver {
     const size_t channel = (index % kUniversesPerPin) * kChannelsPerUniverse;
     const size_t remaining = kBytesPerPort - channel;
     const size_t capacity = remaining < kChannelsPerUniverse ? remaining : kChannelsPerUniverse;
-    // Each port occupies 1080 bytes: 510 + 510 + 60, with no inter-port gap.
-    // Only convert real pixels, even if the sender pads a packet to 512 channels.
+    // Each port occupies 1530 bytes: three full 510-channel RGB universes.
+    // Ignore channels 511/512 if the sender pads a packet to 512 channels.
     size_t bytes = length < capacity ? length : capacity;
     bytes -= bytes % 3;
     uint8_t* dest = staging_ + port * kBytesPerPort + channel;
